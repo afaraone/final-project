@@ -11,7 +11,6 @@ rvm:
 
 env:
   global:
-  - JOBS=0
   - CC_TEST_REPORTER_ID=$CODE_CLIMATE_TAG
 
 before_script:
