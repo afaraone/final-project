@@ -1,18 +1,16 @@
 sudo: required
 dist: trusty
 
-env:
-  global:
-    - CC_TEST_REPORTER_ID=$CODE_CLIMATE_TAG
-
 matrix:
-
 include:
-
 
 language: ruby
 rvm:
   - 2.5.1
+
+env:
+  global:
+  - CC_TEST_REPORTER_ID=$CODE_CLIMATE_TAG
 
 before_script:
   - cd lifestyle-app-backend
@@ -32,12 +30,12 @@ after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 
 # second job
-- language: node_js
+language: node_js
 node_js:
   - "6"
 
 env:
-global:
+  global:
 # See https://git.io/vdao3 for details.
   - JOBS=1
 
