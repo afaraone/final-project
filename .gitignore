@@ -27,3 +27,5 @@
 
 # Ignore master key for decrypting credentials and more.
 /lifestyle-app-backend/config/master.key
+
+/lifestyle-app-frontend/node_modules
