@@ -5,6 +5,10 @@ env:
   global:
     - CC_TEST_REPORTER_ID=$CODE_CLIMATE_TAG
 
+matrix:
+
+include:
+
 
 language: ruby
 rvm:
@@ -26,3 +30,14 @@ script:
 
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+
+- language: node_js
+node_js:
+  - "6"
+
+before_script:
+  - cd lifestyle-app-frontend
+  - npm install
+
+script:
+  - npm test
