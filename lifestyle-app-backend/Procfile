@@ -1,2 +1,2 @@
-web: cd lifestyle-app-frontend && npm start
+web: cd lifestyle-app-frontend && node src/index.js
 api: cd lifestyle-app-backend && bin/rails server -p $PORT -e $RAILS_ENV
