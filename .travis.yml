@@ -1,28 +1,51 @@
 sudo: required
 dist: trusty
 
-env:
-  global:
-    - CC_TEST_REPORTER_ID=$CODE_CLIMATE_TAG
-
-
 language: ruby
-rvm:
-  - 2.5.1
 
-before_script:
-  - cd lifestyle-app-backend
-  - bundle
-  - bundle exec rails db:create
-  - bundle exec rails db:migrate RAILS_ENV=test
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-  - chmod +x ./cc-test-reporter
-  - ./cc-test-reporter before-build
+jobs:
+  include:
 
-script:
-  - bundle exec rspec
-  - bundle exec rubocop
+  - stage: backend
+
+    rvm:
+      - 2.5.1
+
+    env:
+      global:
+      - CC_TEST_REPORTER_ID=$CODE_CLIMATE_TAG
+
+    before_script:
+      - cd lifestyle-app-backend
+      - bundle
+      - bundle exec rails db:create
+      - bundle exec rails db:migrate RAILS_ENV=test
+      - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+      - chmod +x ./cc-test-reporter
+      - ./cc-test-reporter before-build
+
+    script:
+      - bundle exec rspec
+      - bundle exec rubocop
 
 
-after_script:
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+    after_script:
+      - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+
+  - stage: frontend
+  # second job
+    language: node_js
+    node_js:
+      - "6"
+
+    env:
+      global:
+    # See https://git.io/vdao3 for details.
+      - JOBS=1
+
+    before_script:
+      - cd lifestyle-app-frontend
+      - npm install
+
+    script:
+      - npm test
