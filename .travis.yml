@@ -31,9 +31,15 @@ script:
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 
+# second job
 - language: node_js
 node_js:
   - "6"
+
+env:
+global:
+# See https://git.io/vdao3 for details.
+  - JOBS=1
 
 before_script:
   - cd lifestyle-app-frontend
