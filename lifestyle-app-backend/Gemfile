@@ -51,7 +51,13 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
+group :development, :test do
+  gem 'rubocop'
+end
+
 group :test do
+  gem 'simplecov'
+  gem 'simplecov-console'
   gem 'rspec-rails'
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
