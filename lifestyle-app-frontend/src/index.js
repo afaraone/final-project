@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import axios from 'axios';
+// import axios from 'axios';
 import './index.css';
 // import App from './App';
 import * as serviceWorker from './serviceWorker';
@@ -18,7 +18,8 @@ class ToDoList extends React.Component {
     super(props);
 
     this.state = {
-      userInput: '',
+      userTitle: '',
+      userBody: '',
       list: null
     }
   }
@@ -31,20 +32,37 @@ class ToDoList extends React.Component {
       }))
   }
 
-  changeUserInput(input){
+  changeUserTitle(input){
     this.setState({
-      userInput: input
+      userTitle: input
     });
   }
 
-  addToList(input){
-    let listArray = this.state.list;
+  changeUserBody(input) {
+    this.setState({
+      userBody: input
+    })
+  }
 
-    listArray.push(input);
+  addToList(){
+    let body = JSON.stringify({to_do: {title: this.state.userTitle, body: this.state.userBody} })
+
+    fetch("http://localhost:3000/to_dos/", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: body
+    }).then((response) => {return response.json()})
+    .then((to_do)=>{
+      this.setState({
+        list: this.state.list.concat(to_do)
+      })
+    })
 
     this.setState({
-      list: listArray,
-      userInput: ''
+      userTitle: '',
+      userBody: ''
     })
   }
 
@@ -64,8 +82,13 @@ class ToDoList extends React.Component {
       return(
         <div className='to-do-list-main'>
           <input
-          onChange={ (e)=> this.changeUserInput(e.target.value)}
-          value={this.state.userInput}
+          onChange={ (e)=> this.changeUserTitle(e.target.value)}
+          value={this.state.userTitle}
+          type="text"
+          />
+          <input
+          onChange={ (e)=> this.changeUserBody(e.target.value)}
+          value={this.state.userBody}
           type="text"
           />
           <button onClick={ ()=> this.addToList(this.state.userInput) }>Submit</button>
