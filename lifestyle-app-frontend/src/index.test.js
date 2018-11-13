@@ -11,8 +11,19 @@ describe('ToDoList', () => {
       target: { value: 'hello' }
     })
     wrapper.find('button').simulate('click');
-    // Expect the wrapper object to be defined
     expect(wrapper.find('.todo').text()).toEqual('hello')
   });
 
+  it('has an arrays of toDos', () => {
+    const wrapper = shallow(<ToDoList />);
+    wrapper.find('input').simulate('change', {
+      target: { value: 'hello' }
+    })
+    wrapper.find('button').simulate('click');
+    wrapper.find('input').simulate('change', {
+      target: { value: 'hello3' }
+    })
+    wrapper.find('button').simulate('click');
+    expect(wrapper.find('.todo').length).toEqual(2)
+  })
 });

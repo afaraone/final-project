@@ -36,7 +36,7 @@ addToList(input){
        type="text"
        />
        <button onClick={ ()=> this.addToList(this.state.userInput) }>Submit</button>
-       <ul>
+       <ul class="todoarray">
         {this.state.list.map( (val, i) => <li key={i} className="todo">{val}</li>)}
        </ul>
       </div>
