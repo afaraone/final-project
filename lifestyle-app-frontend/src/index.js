@@ -19,6 +19,17 @@ changeUserInput(input){
     userInput: input
   });
 }
+
+addToList(input){
+  let listArray = this.state.list;
+
+  listArray.push(input);
+
+  this.setState({
+    list: listArray
+  })
+}
+
   render() {
     return (
       <div className='to-do-list-main'>
@@ -27,7 +38,7 @@ changeUserInput(input){
        value={this.state.userInput}
        type="text"
        />
-       <button>Submit</button>
+       <button onClick={ ()=> this.addToList(this.state.userInput) }>Submit</button>
     );
   }
 }
