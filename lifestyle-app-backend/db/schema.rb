@@ -23,5 +23,4 @@ ActiveRecord::Schema.define(version: 2018_11_13_134439) do
     t.datetime "updated_at", null: false
     t.boolean "complete", default: false
   end
-
 end
