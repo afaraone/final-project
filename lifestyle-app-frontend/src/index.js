@@ -4,7 +4,7 @@ import './index.css';
 // import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-class ToDoList extends Component {
+export default class ToDoList extends React.Component {
   constructor(props){
     super(props);
 
@@ -26,7 +26,8 @@ addToList(input){
   listArray.push(input);
 
   this.setState({
-    list: listArray
+    list: listArray,
+    userInput: ''
   })
 }
 
@@ -39,11 +40,13 @@ addToList(input){
        type="text"
        />
        <button onClick={ ()=> this.addToList(this.state.userInput) }>Submit</button>
+       <ul>
+        {this.state.list.map( (val)=> <li>{val}</li>)}
+       </ul>
+      </div>
     );
   }
 }
-
-
 
 
 
