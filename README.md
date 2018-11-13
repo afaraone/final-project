@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/afaraone/final-project.svg?branch=master)](https://travis-ci.com/afaraone/final-project)
+
 # Garden Todos
 
 A web app that visualises your todo lists as beautiful gardens!
