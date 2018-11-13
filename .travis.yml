@@ -10,6 +10,9 @@ jobs:
 
     rvm:
       - 2.5.1
+      
+    cache: bundler
+
 
     env:
       global:
@@ -37,6 +40,8 @@ jobs:
     language: node_js
     node_js:
       - "6"
+    
+    cache: npm
 
     env:
       global:

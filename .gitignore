@@ -29,3 +29,5 @@
 /lifestyle-app-backend/config/master.key
 
 /lifestyle-app-frontend/node_modules
+package-lock.json
+
