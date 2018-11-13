@@ -4,7 +4,7 @@ import './index.css';
 // import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-export default class ToDoList extends React.Component {
+class ToDoList extends Component {
   constructor(props){
     super(props);
 
@@ -19,18 +19,6 @@ changeUserInput(input){
     userInput: input
   });
 }
-
-addToList(input){
-  let listArray = this.state.list;
-
-  listArray.push(input);
-
-  this.setState({
-    list: listArray,
-    userInput: ''
-  })
-}
-
   render() {
     return (
       <div className='to-do-list-main'>
@@ -39,14 +27,12 @@ addToList(input){
        value={this.state.userInput}
        type="text"
        />
-       <button onClick={ ()=> this.addToList(this.state.userInput) }>Submit</button>
-       <ul>
-        {this.state.list.map( (val)=> <li>{val}</li>)}
-       </ul>
-      </div>
+       <button>Submit</button>
     );
   }
 }
+
+
 
 
 
