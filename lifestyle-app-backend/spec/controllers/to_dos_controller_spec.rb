@@ -52,7 +52,7 @@ RSpec.describe ToDosController, type: :controller do
       expect(response).to be_successful
     end
   end
-  
+
   describe "GET #show" do
     it "returns a success response" do
       to_do = ToDo.create! valid_attributes
@@ -91,14 +91,15 @@ RSpec.describe ToDosController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {garden_id: 2, title: 'test2', body: 'test2'}
       }
 
       it "updates the requested to_do" do
         to_do = ToDo.create! valid_attributes
         put :update, params: {id: to_do.to_param, to_do: new_attributes}, session: valid_session
         to_do.reload
-        skip("Add assertions for updated state")
+        expect(ToDo.where(title: 'test2').exists?).to be true
+
       end
 
       it "renders a JSON response with the to_do" do
