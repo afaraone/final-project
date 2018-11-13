@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# CRUD Controller for ToDos
 class ToDosController < ApplicationController
   before_action :set_to_do, only: %i[show update destroy]
 
