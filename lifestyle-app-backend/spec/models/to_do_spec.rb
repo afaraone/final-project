@@ -16,4 +16,11 @@ RSpec.describe ToDo, type: :model do
       expect(todo.valid?).to eq false
     end
   end
+
+  describe 'complete' do
+    it 'is false by default' do
+      todo = ToDo.new(title: 'test', body: 'test')
+      expect(todo.complete).to be false
+    end
+  end
 end
