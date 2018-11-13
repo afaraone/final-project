@@ -42,3 +42,7 @@ Style/MixinUsage:
 # URISchemes: http, https
 Metrics/LineLength:
   Max: 130
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
