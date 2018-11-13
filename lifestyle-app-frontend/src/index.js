@@ -1,50 +1,81 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
 import './index.css';
 // import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-export default class ToDoList extends React.Component {
+export default class App extends React.Component {
+  render() {
+    return(
+      <ToDoList />
+    )
+  }
+}
+
+class ToDoList extends React.Component {
   constructor(props){
     super(props);
 
     this.state = {
       userInput: '',
-      list: []
+      list: null
     }
   }
 
-changeUserInput(input){
-  this.setState({
-    userInput: input
-  });
-}
+  getToDos() {
+    fetch('http://localhost:3000/to_dos/')
+      .then(res => res.json())
+      .then(res => this.setState({
+        list: res
+      }))
+  }
 
-addToList(input){
-  let listArray = this.state.list;
+  changeUserInput(input){
+    this.setState({
+      userInput: input
+    });
+  }
 
-  listArray.push(input);
+  addToList(input){
+    let listArray = this.state.list;
 
-  this.setState({
-    list: listArray,
-    userInput: ''
-  })
-}
+    listArray.push(input);
+
+    this.setState({
+      list: listArray,
+      userInput: ''
+    })
+  }
+
+  componentDidMount() {
+    this.getToDos()
+  }
 
   render() {
-    return (
-      <div className='to-do-list-main'>
-      <input
-      onChange={ (e)=> this.changeUserInput(e.target.value)}
-       value={this.state.userInput}
-       type="text"
-       />
-       <button onClick={ ()=> this.addToList(this.state.userInput) }>Submit</button>
-       <ul>
-        {this.state.list.map( (val)=> <li>{val}</li>)}
-       </ul>
-      </div>
-    );
+    if (!(this.state && this.state.list)) {
+      return (
+        <h1>Loading</h1>
+      )
+    } else{
+      const todos = this.state.list.map((val) => {
+        return(<li>{val.title}</li>)
+      })
+      return(
+        <div className='to-do-list-main'>
+          <input
+          onChange={ (e)=> this.changeUserInput(e.target.value)}
+          value={this.state.userInput}
+          type="text"
+          />
+          <button onClick={ ()=> this.addToList(this.state.userInput) }>Submit</button>
+
+          <ul>
+            {todos}
+          </ul>
+        </div>
+      )
+    }
   }
 }
 
@@ -101,7 +132,7 @@ addToList(input){
 // }
 
 
-ReactDOM.render(<ToDoList />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
