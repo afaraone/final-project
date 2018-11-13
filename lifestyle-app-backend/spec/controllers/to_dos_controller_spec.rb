@@ -25,15 +25,19 @@ require 'rails_helper'
 
 RSpec.describe ToDosController, type: :controller do
 
+  before :each do
+    request.headers["accept"] = 'application/json'
+  end
+
   # This should return the minimal set of attributes required to create a valid
   # ToDo. As you add validations to ToDo, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {garden_id: 1, title: 'test', body: 'test'}
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {garden_id: nil, title: nil, body: nil}
   }
 
   # This should return the minimal set of values that should be in the session
@@ -48,7 +52,7 @@ RSpec.describe ToDosController, type: :controller do
       expect(response).to be_successful
     end
   end
-
+  
   describe "GET #show" do
     it "returns a success response" do
       to_do = ToDo.create! valid_attributes
