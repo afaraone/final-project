@@ -7,4 +7,11 @@ RSpec.describe ToDo, type: :model do
       expect(todo.valid?).to eq false
     end
   end
+
+  describe 'body' do
+    it 'cannot be blank' do
+      todo = ToDo.new(title: 'test', body: '')
+      expect(todo.valid?).to eq false
+    end
+  end
 end
