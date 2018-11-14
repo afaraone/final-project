@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-
+import sprout from './images/sprout.png'
 export default class App extends Component {
   render() {
     return(
@@ -106,6 +106,7 @@ class ToDoList extends Component {
         <div className='to-do-list'>
           {todos}
         </div>
+        <Garden list={this.state.list}/>
         </div>
       )
     }
@@ -125,5 +126,18 @@ class ToDo extends Component {
     } else {
       return(null)
     }
+  }
+}
+
+class Garden extends Component {
+  render() {
+    const theGarden = this.props.list.map((todo) => {
+      return(<img src={sprout} alt='sprout'/>)
+    })
+    return(
+      <div className='garden-div'>
+      {theGarden}
+      </div>
+    )
   }
 }
