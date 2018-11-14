@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ToDoForm from './todoform'
 
 export default class ToDoList extends Component {
   constructor(props){
@@ -6,7 +7,7 @@ export default class ToDoList extends Component {
 
     this.state = {
       list: null,
-      loading: true
+      isLoaded: false
     }
   }
 
@@ -16,7 +17,7 @@ export default class ToDoList extends Component {
       .then(res => res.json())
       .then(res => this.setState({
         list: res,
-        loading: false
+        isLoaded: true
       }))
   }
 
@@ -64,8 +65,10 @@ export default class ToDoList extends Component {
   }
 
   render() {
+    const list = this.state.list
+    const notLoaded = !(this.state && this.state.isLoaded)
     // If list is not loaded yet(ie before fetch is done) do the following
-    if (!(this.state && this.state.list)) {
+    if (notLoaded) {
       return (
         <h1>Loading</h1>
       )
@@ -73,7 +76,7 @@ export default class ToDoList extends Component {
 
     else {
       // Get the list and map each element onto a ToDo component
-      const todos = this.state.list.map((todo) => {
+      const todos = list.map((todo) => {
         // Each ToDo comp is given a key, completeClicked fn and deleteClicked fn
         return(
           <ToDo
@@ -97,62 +100,6 @@ export default class ToDoList extends Component {
         </div>
       )
     }
-  }
-}
-
-class ToDoForm extends Component {
-  constructor(props) {
-    super(props);
-    // title and body are vals of text box for form
-    this.state = {
-      title: '',
-      body: '',
-    }
-  }
-
-  changeTitle(input){
-    this.setState({
-      title: input
-    });
-  }
-
-  changeBody(input) {
-    this.setState({
-      body: input
-    });
-  }
-
-  resetForm() {
-    this.changeTitle('')
-    this.changeBody('')
-  }
-
-  render() {
-    // prepare vals of textbox to send as a param in POST req to API
-    const data = {"title": this.state.title, "body": this.state.body}
-    return(
-      <div>
-        <input
-          onChange={ (e)=> this.changeTitle(e.target.value)}
-          value={this.state.title}
-          type="text"
-        />
-        <input
-          onChange={ (e)=> this.changeBody(e.target.value)}
-          value={this.state.body}
-          type="text"
-        />
-
-        <button
-          onClick={ ()=> {
-            this.resetForm()
-            this.props.addClicked(data)
-            }
-          }>
-          Submit
-        </button>
-      </div>
-    )
   }
 }
 
