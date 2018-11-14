@@ -63,11 +63,7 @@ class ToDoList extends Component {
       },
       body: body
     }).then((response) => {return response.json()})
-    .then((to_do)=>{
-      this.setState({
-        list: this.state.list.concat(to_do)
-      })
-    })
+    .then(() => this.getToDos())
 
     this.setState({
       userTitle: '',
@@ -86,13 +82,10 @@ class ToDoList extends Component {
       )
     } else{
       const todos = this.state.list.map((todo) => {
-        if (!todo.complete) {
-          return(
-          <ToDo
+        return( <ToDo
           key={todo.id} id={todo.id} title={todo.title} body={todo.body} complete={todo.complete}
           completeClicked={() => this.updateToDo(todo.url)}
-          />)
-        }
+        />)
       })
       return(
         <div className='to-do-complete'>
@@ -121,12 +114,16 @@ class ToDoList extends Component {
 
 class ToDo extends Component {
   render() {
-    return(
-      <div>
-      <h1>{this.props.title}</h1>
-      <h2>{this.props.body}</h2>
-      <button onClick={() => this.props.completeClicked()}>Complete</button>
-      </div>
-    )
+    if (!this.props.complete){
+      return(
+        <div>
+        <h1>{this.props.title}</h1>
+        <h2>{this.props.body}</h2>
+        <button onClick={() => this.props.completeClicked()}>Complete</button>
+        </div>
+      )
+    } else {
+      return(null)
+    }
   }
 }
