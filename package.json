@@ -6,7 +6,7 @@
   "scripts": {
     "backend": "cd lifestyle-app-backend && rails s",
     "frontend": "cd lifestyle-app-frontend && npm start",
-    "go": "concurrently --kill-others \"npm run backend\" \"npm run frontend\""
+    "go": "concurrently --kill-others \"npm:backend\" \"npm:frontend\""
   },
   "repository": {
     "type": "git",
