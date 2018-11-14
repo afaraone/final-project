@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import sprout from './images/sprout.png'
+import pink_flower from './images/pink_flower.png'
 export default class App extends Component {
   render() {
     return(
@@ -132,7 +133,11 @@ class ToDo extends Component {
 class Garden extends Component {
   render() {
     const theGarden = this.props.list.map((todo) => {
-      return(<img src={sprout} alt='sprout'/>)
+      if (todo.complete === false) {
+      return(<img key={todo.id} src={sprout} alt='sprout'/>)
+    } else {
+      return(<img key={todo.id} src={pink_flower} alt='pink_flower'/>)
+    }
     })
     return(
       <div className='garden-div'>
