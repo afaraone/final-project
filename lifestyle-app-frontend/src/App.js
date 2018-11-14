@@ -89,25 +89,27 @@ class ToDoList extends Component {
         />)
       })
       return(
-        <div className='to-do-complete'>
-        <div className='add-to-do'>
-          <input
-          onChange={ (e)=> this.changeUserTitle(e.target.value)}
-          value={this.state.userTitle}
-          type="text"
-          />
-          <input
-          onChange={ (e)=> this.changeUserBody(e.target.value)}
-          value={this.state.userBody}
-          type="text"
-          />
-          <button onClick={ ()=> this.addToList(this.state.userInput) }>Submit</button>
-        </div>
+        <div className='whole-page-div'>
+          <div className='to-do-app split left'>
+            <div className='add-to-do'>
+              <input
+                onChange={ (e)=> this.changeUserTitle(e.target.value)}
+                value={this.state.userTitle}
+                type="text"
+              />
+              <input
+                onChange={ (e)=> this.changeUserBody(e.target.value)}
+                value={this.state.userBody}
+                type="text"
+              />
+              <button onClick={ ()=> this.addToList(this.state.userInput) }>Submit</button>
+            </div>
 
-        <div className='to-do-list'>
-          {todos}
-        </div>
-        <Garden list={this.state.list}/>
+            <div className='to-do-list'>
+              {todos}
+            </div>
+          </div>
+          <Garden list={this.state.list}/>
         </div>
       )
     }
@@ -134,13 +136,13 @@ class Garden extends Component {
   render() {
     const theGarden = this.props.list.map((todo) => {
       if (todo.complete === false) {
-      return(<img key={todo.id} src={sprout} alt='sprout'/>)
+      return(<img class='grid-item' key={todo.id} src={sprout} alt='sprout'/>)
     } else {
-      return(<img key={todo.id} src={pink_flower} alt='pink_flower'/>)
+      return(<img class='grid-item' key={todo.id} src={pink_flower} alt='pink_flower'/>)
     }
     })
     return(
-      <div className='garden-div'>
+      <div className='garden-div grid-container split right'>
       {theGarden}
       </div>
     )

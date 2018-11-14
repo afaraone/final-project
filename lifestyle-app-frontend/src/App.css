@@ -30,3 +30,50 @@
     transform: rotate(360deg);
   }
 }
+
+.to-do-list {
+  width: 40%;
+  word-break: break-word;
+}
+
+.add-to-do {
+  margin-bottom: 10%;
+}
+
+.split {
+    height: 100%;
+    width: 50%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+.left {
+    left: 0;
+}
+
+.right {
+    right: 0;
+    background-color: red;
+}
+
+.grid-container {
+  display: grid;
+  grid-column-gap: 50px;
+  width: 50%;
+  height: 100%;
+  grid-template-columns: auto auto auto auto;
+  background-color: #804000;
+  padding: 10px;
+  float: right;
+}
+.grid-item {
+  object-fit: cover;
+  width: 100%;
+  max-height: 100%;
+  padding: 1px;
+  font-size: 30px;
+  text-align: center;
+}
