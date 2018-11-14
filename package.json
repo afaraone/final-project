@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "backend": "cd lifestyle-app-backend && rails s",
-    "frontend": "cd lifestyle-app-frontend && npm start"
+    "frontend": "cd lifestyle-app-frontend && npm start",
+    "go": "concurrently --kill-others \"npm run backend\" \"npm run frontend\""
   },
   "repository": {
     "type": "git",
@@ -18,6 +19,6 @@
   },
   "homepage": "https://github.com/afaraone/final-project#readme",
   "dependencies": {
-    "parallelshell": "^3.0.2"
+    "concurrently": "^4.0.1"
   }
 }
