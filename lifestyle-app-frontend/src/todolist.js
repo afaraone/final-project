@@ -1,45 +1,103 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-export default class ToDoList extends React.Component {
+export default class ToDoList extends Component {
   constructor(props){
     super(props);
 
     this.state = {
-      userInput: '',
-      list: []
+      userTitle: '',
+      userBody: '',
+      list: null
     }
   }
 
-changeUserInput(input){
-  this.setState({
-    userInput: input
-  });
-}
+  getToDos() {
+    fetch('http://localhost:3000/to_dos/')
+      .then(res => res.json())
+      .then(res => this.setState({
+        list: res
+      }))
+  }
 
-addToList(input){
-  let listArray = this.state.list;
+  changeUserTitle(input){
+    this.setState({
+      userTitle: input
+    });
+  }
 
-  listArray.push(input);
+  changeUserBody(input) {
+    this.setState({
+      userBody: input
+    })
+  }
 
-  this.setState({
-    list: listArray,
-    userInput: ''
-  })
-}
+  addToList(){
+    let body = JSON.stringify({to_do: {title: this.state.userTitle, body: this.state.userBody} })
+
+    fetch("http://localhost:3000/to_dos/", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: body
+    }).then((response) => {return response.json()})
+    .then((to_do)=>{
+      this.setState({
+        list: this.state.list.concat(to_do)
+      })
+    })
+
+    this.setState({
+      userTitle: '',
+      userBody: ''
+    })
+  }
+
+  componentDidMount() {
+    this.getToDos()
+  }
 
   render() {
-    return (
-      <div className='to-do-list-main'>
-      <input
-      onChange={ (e)=> this.changeUserInput(e.target.value)}
-       value={this.state.userInput}
-       type="text"
-       />
-       <button onClick={ ()=> this.addToList(this.state.userInput) }>Submit</button>
-       <ul class="todoarray">
-        {this.state.list.map( (val, i) => <li key={i} className="todo">{val}</li>)}
-       </ul>
+    if (!(this.state && this.state.list)) {
+      return (
+        <h1>Loading</h1>
+      )
+    } else{
+      const todos = this.state.list.map((todo) => {
+        return(<ToDo title={todo.title} body={todo.body}/>)
+      })
+      return(
+        <div className='to-do-complete'>
+        <div className='add-to-do'>
+          <input
+          onChange={ (e)=> this.changeUserTitle(e.target.value)}
+          value={this.state.userTitle}
+          type="text"
+          />
+          <input
+          onChange={ (e)=> this.changeUserBody(e.target.value)}
+          value={this.state.userBody}
+          type="text"
+          />
+          <button onClick={ ()=> this.addToList(this.state.userInput) }>Submit</button>
+        </div>
+
+        <div className='to-do-list'>
+          {todos}
+        </div>
+        </div>
+      )
+    }
+  }
+}
+
+class ToDo extends Component {
+  render() {
+    return(
+      <div>
+      <h1>{this.props.title}</h1>
+      <h2>{this.props.body}</h2>
       </div>
-    );
+    )
   }
 }
