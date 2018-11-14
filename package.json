@@ -1,0 +1,23 @@
+{
+  "name": "final-project",
+  "version": "1.0.0",
+  "description": "[![Build Status](https://travis-ci.com/afaraone/final-project.svg?branch=master)](https://travis-ci.com/afaraone/final-project)",
+  "main": "index.js",
+  "scripts": {
+    "backend": "cd lifestyle-app-backend && rails s",
+    "frontend": "cd lifestyle-app-frontend && npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/afaraone/final-project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/afaraone/final-project/issues"
+  },
+  "homepage": "https://github.com/afaraone/final-project#readme",
+  "dependencies": {
+    "parallelshell": "^3.0.2"
+  }
+}

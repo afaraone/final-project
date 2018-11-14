@@ -12,7 +12,6 @@ export default class ToDoList extends Component {
   }
 
   getToDos() {
-    console.log('I got called!')
     fetch('http://localhost:3000/to_dos/')
       .then(res => res.json())
       .then(res => this.setState({
@@ -42,7 +41,16 @@ export default class ToDoList extends Component {
       body: body
     })
     .then(() => this.getToDos())
+  }
 
+  deleteToDo(url) {
+    fetch(url, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(() => this.getToDos())
   }
 
   addToList(){
@@ -77,6 +85,7 @@ export default class ToDoList extends Component {
         return( <ToDo
           key={todo.id} id={todo.id} title={todo.title} body={todo.body} complete={todo.complete}
           completeClicked={() => this.updateToDo(todo.url)}
+          deleteClicked={() => this.deleteToDo(todo.url)}
         />)
       })
       return(
@@ -112,6 +121,7 @@ class ToDo extends Component {
         <h1>{this.props.title}</h1>
         <h2>{this.props.body}</h2>
         <button onClick={() => this.props.completeClicked()}>Complete</button>
+        <button onClick={() => this.props.deleteClicked()}>Delete</button>
         </div>
       )
     } else {
