@@ -9,7 +9,6 @@ export default class App extends Component {
     )
   }
 }
-<<<<<<< HEAD
 
 class ToDoList extends Component {
   constructor(props){
@@ -129,5 +128,3 @@ class ToDo extends Component {
     }
   }
 }
-=======
->>>>>>> Refactored
