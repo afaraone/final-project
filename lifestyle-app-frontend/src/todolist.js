@@ -5,18 +5,22 @@ export default class ToDoList extends Component {
     super(props);
 
     this.state = {
-      list: null
+      list: null,
+      loading: true
     }
   }
 
+  // gets all the todos from API
   getToDos() {
     fetch('http://localhost:3000/to_dos/')
       .then(res => res.json())
       .then(res => this.setState({
-        list: res
+        list: res,
+        loading: false
       }))
   }
 
+  // Sets a todo to complete using PUT req to API
   updateToDo(url) {
     const body = JSON.stringify({"to_do": {"complete": true}})
     fetch(url, {
@@ -29,6 +33,7 @@ export default class ToDoList extends Component {
     .then(() => this.getToDos())
   }
 
+  // Deletes ToDo by sending DELETE req to API
   deleteToDo(url) {
     fetch(url, {
       method: 'DELETE',
@@ -39,6 +44,7 @@ export default class ToDoList extends Component {
     .then(() => this.getToDos())
   }
 
+  // Adds new todo by sending POST req to API
   postToDo(data){
     let body = JSON.stringify({to_do: data })
 
@@ -52,11 +58,13 @@ export default class ToDoList extends Component {
     .then(() => this.getToDos())
   }
 
+  // Runs automatically when component is loaded
   componentDidMount() {
     this.getToDos()
   }
 
   render() {
+    // If list is not loaded yet(ie before fetch is done) do the following
     if (!(this.state && this.state.list)) {
       return (
         <h1>Loading</h1>
@@ -64,7 +72,9 @@ export default class ToDoList extends Component {
     }
 
     else {
+      // Get the list and map each element onto a ToDo component
       const todos = this.state.list.map((todo) => {
+        // Each ToDo comp is given a key, completeClicked fn and deleteClicked fn
         return(
           <ToDo
             key={todo.id} data={todo}
@@ -76,9 +86,11 @@ export default class ToDoList extends Component {
 
       return(
         <div className='to-do-complete'>
+          {/* Load up a ToDoForm component*/}
           <div className='to-do-form'>
             <ToDoForm addClicked={(data) => this.postToDo(data)}/>
           </div>
+          {/* Load up the group of ToDo comps made in line 76*/}
           <div className='to-do-list'>
             {todos}
           </div>
@@ -91,6 +103,7 @@ export default class ToDoList extends Component {
 class ToDoForm extends Component {
   constructor(props) {
     super(props);
+    // title and body are vals of text box for form
     this.state = {
       title: '',
       body: '',
@@ -109,7 +122,13 @@ class ToDoForm extends Component {
     });
   }
 
+  resetForm() {
+    this.changeTitle('')
+    this.changeBody('')
+  }
+
   render() {
+    // prepare vals of textbox to send as a param in POST req to API
     const data = {"title": this.state.title, "body": this.state.body}
     return(
       <div>
@@ -126,8 +145,7 @@ class ToDoForm extends Component {
 
         <button
           onClick={ ()=> {
-            this.changeTitle('')
-            this.changeBody('')
+            this.resetForm()
             this.props.addClicked(data)
             }
           }>
