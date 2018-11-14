@@ -31,6 +31,19 @@ export default class ToDoList extends Component {
     })
   }
 
+  updateToDo(url) {
+    const body = JSON.stringify({"to_do": {"complete": true}})
+    fetch(url, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: body
+    })
+    .then(() => this.getToDos())
+
+  }
+
   addToList(){
     let body = JSON.stringify({to_do: {title: this.state.userTitle, body: this.state.userBody} })
 
@@ -41,11 +54,7 @@ export default class ToDoList extends Component {
       },
       body: body
     }).then((response) => {return response.json()})
-    .then((to_do)=>{
-      this.setState({
-        list: this.state.list.concat(to_do)
-      })
-    })
+    .then(() => this.getToDos())
 
     this.setState({
       userTitle: '',
@@ -64,7 +73,10 @@ export default class ToDoList extends Component {
       )
     } else{
       const todos = this.state.list.map((todo) => {
-        return(<ToDo title={todo.title} body={todo.body}/>)
+        return( <ToDo
+          key={todo.id} id={todo.id} title={todo.title} body={todo.body} complete={todo.complete}
+          completeClicked={() => this.updateToDo(todo.url)}
+        />)
       })
       return(
         <div className='to-do-complete'>
@@ -93,11 +105,16 @@ export default class ToDoList extends Component {
 
 class ToDo extends Component {
   render() {
-    return(
-      <div>
-      <h1>{this.props.title}</h1>
-      <h2>{this.props.body}</h2>
-      </div>
-    )
+    if (!this.props.complete){
+      return(
+        <div>
+        <h1>{this.props.title}</h1>
+        <h2>{this.props.body}</h2>
+        <button onClick={() => this.props.completeClicked()}>Complete</button>
+        </div>
+      )
+    } else {
+      return(null)
+    }
   }
 }
