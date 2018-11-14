@@ -19,17 +19,7 @@ export default class ToDoList extends Component {
       }))
   }
 
-  changeUserTitle(input){
-    this.setState({
-      userTitle: input
-    });
-  }
 
-  changeUserBody(input) {
-    this.setState({
-      userBody: input
-    })
-  }
 
   updateToDo(url) {
     const body = JSON.stringify({"to_do": {"complete": true}})
@@ -91,6 +81,10 @@ export default class ToDoList extends Component {
       return(
         <div className='to-do-complete'>
         <div className='add-to-do'>
+        <div classname='todoform'><ToDoForm />
+
+
+        </div>
           <input
           onChange={ (e)=> this.changeUserTitle(e.target.value)}
           value={this.state.userTitle}
@@ -110,6 +104,32 @@ export default class ToDoList extends Component {
         </div>
       )
     }
+  }
+}
+
+class ToDoForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      title: '', body: ''
+    }
+  }
+  changeUserTitle(input){
+    this.setState({
+      userTitle: input
+    });
+  }
+
+  changeUserBody(input) {
+    this.setState({
+      userBody: input
+    })
+  }
+  
+  render() {
+    return(
+      <h1>test</h1>
+    )
   }
 }
 
