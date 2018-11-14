@@ -51,6 +51,6 @@ class ToDosController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def to_do_params
-    params.require(:to_do).permit(:garden_id, :title, :body)
+    params.require(:to_do).permit(:garden_id, :title, :body, :complete)
   end
 end
