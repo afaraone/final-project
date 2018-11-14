@@ -12,6 +12,7 @@ export default class ToDoList extends Component {
   }
 
   getToDos() {
+    console.log('I got called!')
     fetch('http://localhost:3000/to_dos/')
       .then(res => res.json())
       .then(res => this.setState({
