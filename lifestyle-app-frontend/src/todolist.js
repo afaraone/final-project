@@ -16,7 +16,7 @@ export default class ToDoList extends Component {
 
   // gets all the todos from API
   getToDos() {
-    fetch('http://localhost:3000/to_dos/')
+    fetch('http://localhost:3000/api/to_dos/')
       .then(res => res.json())
       .then(res => this.setState({
         list: res,
@@ -52,7 +52,7 @@ export default class ToDoList extends Component {
   postToDo(data){
     let body = JSON.stringify({to_do: data })
 
-    fetch("http://localhost:3000/to_dos/", {
+    fetch("http://localhost:3000/api/to_dos/", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
