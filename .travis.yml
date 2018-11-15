@@ -10,7 +10,7 @@ jobs:
 
     rvm:
       - 2.5.1
-      
+
     cache: bundler
 
 
@@ -19,7 +19,6 @@ jobs:
       - CC_TEST_REPORTER_ID=$CODE_CLIMATE_TAG
 
     before_script:
-      - cd lifestyle-app-backend
       - bundle
       - bundle exec rails db:create
       - bundle exec rails db:migrate RAILS_ENV=test
@@ -40,7 +39,7 @@ jobs:
     language: node_js
     node_js:
       - "6"
-    
+
     cache: npm
 
     env:
