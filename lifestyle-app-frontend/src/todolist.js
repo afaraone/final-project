@@ -17,7 +17,9 @@ export default class ToDoList extends Component {
   // gets all the todos from API
   getToDos() {
     fetch('http://localhost:3000/to_dos/')
-      .then(res => res.json())
+      .then((res) => {
+        return res.json()
+      })
       .then(res => this.setState({
         list: res,
         isLoaded: true
@@ -58,8 +60,12 @@ export default class ToDoList extends Component {
         'Content-Type': 'application/json'
       },
       body: body
-    }).then((response) => {return response.json()})
-    .then(() => this.getToDos())
+    }).then((response) => {
+      return response.json()
+    })
+    .then(() => {
+      this.getToDos()
+    })
   }
 
   // Runs automatically when component is loaded
@@ -131,9 +137,9 @@ class ToDo extends Component {
     const {title, body, url, complete} = this.props.data
     if (!complete){
       return(
-        <div>
-          <h1>{title}</h1>
-          <h2>{body}</h2>
+        <div className="todo">
+          <h1 className='todo-title'>{title}</h1>
+          <h2 className='todo-body'>{body}</h2>
           <button onClick={() => this.props.completeClicked(url)}>Complete</button>
           <button onClick={() => this.props.deleteClicked(url)}>Delete</button>
         </div>

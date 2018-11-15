@@ -1,22 +1,49 @@
 import React from 'react';
-import { shallow } from './enzyme';
+import { shallow, mount } from './enzyme';
 import waitUntil from 'async-wait-until';
-
+import sinon from 'sinon'
 import ToDoList from '../todolist'
+import ToDoForm from '../todoform'
 
 var nock = require('nock')
 
 describe('ToDoList', () => {
 
-  it('creates todo', () => {
-    const wrapper = shallow(<ToDoList />);
-    console.log(wrapper.debug())
-    wrapper.find('input').simulate('change', {
-      target: { value: 'hello' }
-    })
-    wrapper.find('button').simulate('click');
-    
+it('renders 1 <ToDoList /> component', () => {
+  const component = shallow(<ToDoList />);
+  expect(component).toHaveLength(1);
+});
+
+it('renders 1 <ToDoList /> component', async () => {
+  const component = await mount(<ToDoList />);
+  const button = await component.find('button');
+  const titleInput = await component.find('.title-input');
+  titleInput.simulate('change', {
+    target: {value: 'hello'}
   });
+  component.find('.body-input').simulate('change', {
+    target: {value: 'say hi'}
+  });
+  button.simulate('click');
+  expect(component.state().list).toHaveLength(1);
+});
+
+  // it('calls componentDidMount', async () => {
+  //   sinon.spy(ToDoList.prototype, 'componentDidMount');
+  //   const wrapper = await mount(<ToDoList />);
+  //   expect(ToDoList.prototype.componentDidMount).to.have.property('callCount', 1);
+  // });
+
+
+  // it('creates todo', () => {
+  //   const wrapper = mount(<ToDoList />);
+  //   wrapper.find('input').simulate('change', {
+  //     target: { value: 'hello' }
+  //   })
+  //   wrapper.find('')
+  //   wrapper.find('button').simulate('click');
+  //   expect(wrapper.find('.todo').text()).toEqual('hello')
+  // });
 //
 //   it('has an arrays of toDos',  () => {
 //     fetch.mockResponse(JSON.stringify([{ "id": 1,

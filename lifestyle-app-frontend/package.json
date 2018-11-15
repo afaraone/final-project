@@ -20,7 +20,6 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-
   "browserslist": [
     ">0.2%",
     "not dead",
@@ -30,6 +29,8 @@
   "devDependencies": {
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.7.0",
-    "jest-fetch-mock": "^1.7.4"
+    "jest-fetch-mock": "^1.7.4",
+    "puppeteer": "^1.10.0",
+    "sinon": "^7.1.1"
   }
 }

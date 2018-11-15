@@ -32,18 +32,18 @@ export default class ToDoForm extends Component {
     const data = {"title": this.state.title, "body": this.state.body}
     return(
       <div>
-        <input
+        <input className='title-input'
           onChange={ (e)=> this.changeTitle(e.target.value)}
           value={this.state.title}
           type="text"
         />
-        <input
+        <input className='body-input'
           onChange={ (e)=> this.changeBody(e.target.value)}
           value={this.state.body}
           type="text"
         />
 
-        <button
+        <button className='todo-submit'
           onClick={ ()=> {
             this.resetForm()
             this.props.addClicked(data)
