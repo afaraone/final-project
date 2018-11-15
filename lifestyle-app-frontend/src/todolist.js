@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import ToDoForm from './todoform'
+import sprout from './images/sprout.png'
+import pink_flower from './images/pink_flower.png'
+
 
 export default class ToDoList extends Component {
   constructor(props){
@@ -97,9 +100,29 @@ export default class ToDoList extends Component {
           <div className='to-do-list'>
             {todos}
           </div>
+          <div className='to-do-garden'>
+            <Garden list={this.state.list}/>
+          </div>
         </div>
       )
     }
+  }
+}
+
+class Garden extends Component {
+  render() {
+    const theGarden = this.props.list.map((todo) => {
+      if (todo.complete === false) {
+      return(<img class='grid-item' key={todo.id} src={sprout} alt='sprout'/>)
+    } else {
+      return(<img class='grid-item' key={todo.id} src={pink_flower} alt='pink_flower'/>)
+    }
+    })
+    return(
+      <div className='garden-div grid-container split right'>
+      {theGarden}
+      </div>
+    )
   }
 }
 
