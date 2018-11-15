@@ -24,15 +24,5 @@
   "homepage": "https://github.com/afaraone/final-project#readme",
   "dependencies": {
     "concurrently": "^4.0.1"
-  },
-  "devDependencies": {
-    "babel-eslint": "^9.0.0",
-    "eslint": "^5.9.0",
-    "eslint-config-react-app": "^3.0.5",
-    "eslint-config-strongloop": "^2.1.0",
-    "eslint-plugin-flowtype": "^2.50.3",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-jsx-a11y": "^6.1.2",
-    "eslint-plugin-react": "^7.11.1"
   }
 }
