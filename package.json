@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "pretest": "eslint --ignore-path .gitignore .",
-    "backend": "cd lifestyle-app-backend && rails s",
+    "backend": "rails s",
     "frontend": "cd lifestyle-app-frontend && npm start",
     "go": "concurrently --kill-others \"npm:backend\" \"npm:frontend\""
   },
