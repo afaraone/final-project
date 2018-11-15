@@ -9,7 +9,7 @@
     "go": "concurrently --kill-others \"npm:backend\" \"npm:frontend\"",
     "build": "cd lifestyle-app-frontend && npm install && npm run build && cd ..",
     "deploy": "cp -a lifestyle-app-frontend/build/. lifestyle-app-backend/public/",
-    "postinstall": "npm run build && npm run deploy && echo 'Frontend built!'"
+    "postinstall": "npm run build && npm run deploy && echo 'Frontend built!' && cd lifestyle-app-backend"
   },
   "repository": {
     "type": "git",

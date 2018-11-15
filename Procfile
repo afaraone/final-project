@@ -1,1 +1,1 @@
-web: cd lifestyle-app-backend && bundle exec rails s
+web: bundle exec rails s
