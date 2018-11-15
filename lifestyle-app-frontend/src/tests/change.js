@@ -1,7 +1,10 @@
 import React from 'react';
 import { shallow } from './enzyme';
+import waitUntil from 'async-wait-until';
 
 import ToDoList from '../todolist'
+
+var nock = require('nock')
 
 describe('ToDoList', () => {
 
@@ -12,7 +15,7 @@ describe('ToDoList', () => {
       target: { value: 'hello' }
     })
     wrapper.find('button').simulate('click');
-
+    
   });
 //
 //   it('has an arrays of toDos',  () => {
