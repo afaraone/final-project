@@ -6,7 +6,6 @@
 
 # Ignore bundler config.
 /lifestyle-app-backend/.bundle
-/lifestyle-app-backend/Gemfile.lock
 /lifestyle-app-backend/coverage/*
 
 # Ignore all logfiles and tempfiles.
