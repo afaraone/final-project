@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.com/afaraone/final-project.svg?branch=master)](https://travis-ci.com/afaraone/final-project)
+[![Code Climate](https://codeclimate.com/github/codeclimate/codeclimate/badges/gpa.svg)](https://codeclimate.com/github/afaraone/final-project)
 
 # Garden Todos
 
