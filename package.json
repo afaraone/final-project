@@ -4,8 +4,10 @@
   "description": "[![Build Status](https://travis-ci.com/afaraone/final-project.svg?branch=master)](https://travis-ci.com/afaraone/final-project)",
   "main": "index.js",
   "scripts": {
-    "pretest": "eslint --ignore-path .gitignore .",
+    "fix": "eslint --ignore-path .gitignore .",
     "backend": "rails s",
+    "test-front": "cd lifestyle-app-frontend && npm test",
+    "test": "rspec && rubocop && npm run test-front",
     "frontend": "cd lifestyle-app-frontend && npm start",
     "start": "concurrently --kill-others \"npm:backend\" \"npm:frontend\"",
     "build": "cd lifestyle-app-frontend && npm install && npm run build && cd ..",

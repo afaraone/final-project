@@ -118,9 +118,9 @@ class Garden extends Component {
   render() {
     const theGarden = this.props.list.map((todo) => {
       if (todo.complete === false) {
-      return(<img class='grid-item' key={todo.id} src={sprout} alt='sprout'/>)
+      return(<img className='grid-item' key={todo.id} src={sprout} alt='sprout'/>)
     } else {
-      return(<img class='grid-item' key={todo.id} src={pink_flower} alt='pink_flower'/>)
+      return(<img className='grid-item' key={todo.id} src={pink_flower} alt='pink_flower'/>)
     }
     })
     return(
