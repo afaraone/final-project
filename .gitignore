@@ -29,5 +29,6 @@ public/assets
 config/master.key
 
 /lifestyle-app-frontend/node_modules
+/lifestyle-app-backend/
 package-lock.json
 node_modules
