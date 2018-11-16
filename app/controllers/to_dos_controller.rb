@@ -17,8 +17,12 @@ class ToDosController < ApplicationController
   # POST /to_dost
   # POST /to_dos.json
   def create
-    @to_do = SimpleToDo.new(to_do_params)
-
+    if params[:type] == 'SimpleToDo'
+      @to_do = SimpleToDo.new(to_do_params)
+    else
+      @to_do = TimedToDo.new(to_do_params)
+    end
+    
     if @to_do.save
       render :show, status: :created, location: @to_do
     else
@@ -51,6 +55,6 @@ class ToDosController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def to_do_params
-    params.require(:to_do).permit(:garden_id, :title, :body, :complete)
+    params.require(:to_do).permit(:garden_id, :title, :body, :complete, :start_time, :end_time, :type)
   end
 end
