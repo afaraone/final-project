@@ -3,16 +3,12 @@ import React from 'react';
 import { shallow, mount } from './enzyme';
 import waitUntil from 'async-wait-until';
 import sinon from 'sinon'
-=======
-import { shallow } from './enzyme';
 
->>>>>>> master
 import ToDoList from '../todolist'
 import ToDoForm from '../todoform'
 
 describe('ToDoList', () => {
 
-<<<<<<< HEAD
 it('renders 1 <ToDoList /> component', () => {
   const component = shallow(<ToDoList />);
   expect(component).toHaveLength(1);
@@ -27,16 +23,6 @@ it('renders 1 <ToDoList /> component', async () => {
   });
   component.find('.body-input').simulate('change', {
     target: {value: 'say hi'}
-=======
-  it('creates todo', () => {
-    const wrapper = shallow(<ToDoList />);
-    console.log(wrapper.debug())
-    wrapper.find('input').simulate('change', {
-      target: { value: 'hello' }
-    })
-    wrapper.find('button').simulate('click');
-
->>>>>>> master
   });
   button.simulate('click');
   expect(component.state().list).toHaveLength(1);

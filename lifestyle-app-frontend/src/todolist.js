@@ -14,17 +14,6 @@ export default class ToDoList extends Component {
   }
 
   // gets all the todos from API
-<<<<<<< HEAD
-  getToDos() {
-    fetch('http://localhost:3000/to_dos/')
-      .then((res) => {
-        return res.json()
-      })
-      .then(res => this.setState({
-        list: res,
-        isLoaded: true
-      }))
-=======
   async getToDos() {
     try {
       let response = await fetch('/api/to_dos/')
@@ -33,7 +22,6 @@ export default class ToDoList extends Component {
     } catch (error) {
       console.log(error)
     }
->>>>>>> master
   }
 
   // Sets a todo to complete using PUT req to API
@@ -67,21 +55,6 @@ export default class ToDoList extends Component {
   // Adds new todo by sending POST req to API
   async postToDo(data){
     let body = JSON.stringify({to_do: data })
-<<<<<<< HEAD
-
-    fetch("http://localhost:3000/to_dos/", {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: body
-    }).then((response) => {
-      return response.json()
-    })
-    .then(() => {
-      this.getToDos()
-    })
-=======
     try {
       await fetch("/api/to_dos/", {
         method: 'POST',
@@ -92,7 +65,6 @@ export default class ToDoList extends Component {
       console.log(error)
     }
     this.getToDos()
->>>>>>> master
   }
 
   // Runs automatically when component is loaded
