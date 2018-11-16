@@ -5,28 +5,28 @@
 #   git config --global core.excludesfile '~/.gitignore_global'
 
 # Ignore bundler config.
-/lifestyle-app-backend/.bundle
-/lifestyle-app-backend/Gemfile.lock
-/lifestyle-app-backend/coverage/*
+.bundle
+coverage/*
+public/*
 
 # Ignore all logfiles and tempfiles.
-/lifestyle-app-backend/log/*
-/lifestyle-app-backend/tmp/*
+log/*
+tmp/*
 !/log/.keep
 !/tmp/.keep
 
 # Ignore uploaded files in development
-/lifestyle-app-backend/storage/*
+storage
 !/storage/.keep
 
-/lifestyle-app-backend/node_modules
-/lifestyle-app-backend/yarn-error.log
+node_modules
+yarn-error.log
 
-/lifestyle-app-backend/public/assets
-/lifestyle-app-backend/.byebug_history
+public/assets
+.byebug_history
 
 # Ignore master key for decrypting credentials and more.
-/lifestyle-app-backend/config/master.key
+config/master.key
 
 /lifestyle-app-frontend/node_modules
 package-lock.json

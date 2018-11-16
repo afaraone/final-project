@@ -4,9 +4,13 @@
   "description": "[![Build Status](https://travis-ci.com/afaraone/final-project.svg?branch=master)](https://travis-ci.com/afaraone/final-project)",
   "main": "index.js",
   "scripts": {
-    "backend": "cd lifestyle-app-backend && rails s",
+    "pretest": "eslint --ignore-path .gitignore .",
+    "backend": "rails s",
     "frontend": "cd lifestyle-app-frontend && npm start",
-    "go": "concurrently --kill-others \"npm:backend\" \"npm:frontend\""
+    "go": "concurrently --kill-others \"npm:backend\" \"npm:frontend\"",
+    "build": "cd lifestyle-app-frontend && npm install && npm run build && cd ..",
+    "deploy-front": "cp -a lifestyle-app-frontend/build/. public/",
+    "heroku-postbuild": "npm run build && npm run deploy-front && echo 'Frontend built!'"
   },
   "repository": {
     "type": "git",

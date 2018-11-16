@@ -7,7 +7,6 @@ import pink_flower from './images/pink_flower.png'
 export default class ToDoList extends Component {
   constructor(props){
     super(props);
-
     this.state = {
       list: null,
       isLoaded: false
@@ -15,6 +14,7 @@ export default class ToDoList extends Component {
   }
 
   // gets all the todos from API
+<<<<<<< HEAD
   getToDos() {
     fetch('http://localhost:3000/to_dos/')
       .then((res) => {
@@ -24,35 +24,50 @@ export default class ToDoList extends Component {
         list: res,
         isLoaded: true
       }))
+=======
+  async getToDos() {
+    try {
+      let response = await fetch('/api/to_dos/')
+      let json = await response.json()
+      this.setState({list: json, isLoaded: true})
+    } catch (error) {
+      console.log(error)
+    }
+>>>>>>> master
   }
 
   // Sets a todo to complete using PUT req to API
-  updateToDo(url) {
-    const body = JSON.stringify({"to_do": {"complete": true}})
-    fetch(url, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: body
-    })
-    .then(() => this.getToDos())
+  async updateToDo(url) {
+    let body = JSON.stringify({"to_do": {"complete": true}})
+    try {
+      await fetch(url, {
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        body: body
+      })
+    } catch (error) {
+      console.log(error)
+    }
+    this.getToDos()
   }
 
   // Deletes ToDo by sending DELETE req to API
-  deleteToDo(url) {
-    fetch(url, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    .then(() => this.getToDos())
+  async deleteToDo(url) {
+    try {
+      await fetch(url, {
+        method: 'DELETE',
+        headers: {'Content-Type': 'application/json'}
+      })
+    } catch (error) {
+      console.log(error)
+    }
+    this.getToDos()
   }
 
   // Adds new todo by sending POST req to API
-  postToDo(data){
+  async postToDo(data){
     let body = JSON.stringify({to_do: data })
+<<<<<<< HEAD
 
     fetch("http://localhost:3000/to_dos/", {
       method: 'POST',
@@ -66,6 +81,18 @@ export default class ToDoList extends Component {
     .then(() => {
       this.getToDos()
     })
+=======
+    try {
+      await fetch("/api/to_dos/", {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: body
+      })
+    } catch (error) {
+      console.log(error)
+    }
+    this.getToDos()
+>>>>>>> master
   }
 
   // Runs automatically when component is loaded
