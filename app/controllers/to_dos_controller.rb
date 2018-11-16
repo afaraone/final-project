@@ -14,10 +14,10 @@ class ToDosController < ApplicationController
   # GET /to_dos/1.json
   def show; end
 
-  # POST /to_dos
+  # POST /to_dost
   # POST /to_dos.json
   def create
-    @to_do = ToDo.new(to_do_params)
+    @to_do = SimpleToDo.new(to_do_params)
 
     if @to_do.save
       render :show, status: :created, location: @to_do

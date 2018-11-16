@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(version: 2018_11_13_123406) do
     t.string "title"
     t.string "body"
     t.string "type", null: false
+    t.datetime "start_time"
+    t.datetime "end_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "complete", default: false
