@@ -1,5 +1,7 @@
-global.fetch = require('jest-fetch-mock')
-import { configure } from 'enzyme';
+// global.fetch = require('jest-fetch-mock')
+
+import Enzyme, { configure, shallow, mount, render } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 configure({ adapter: new Adapter() });
+export { shallow, mount, render };

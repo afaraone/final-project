@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import ToDoForm from './todoform'
-import sprout from './images/sprout.png'
-import pink_flower from './images/pink_flower.png'
-
+import ToDo from './todo'
+import Garden from './garden'
 
 export default class ToDoList extends Component {
   constructor(props){
@@ -110,41 +109,6 @@ export default class ToDoList extends Component {
           </div>
         </div>
       )
-    }
-  }
-}
-
-class Garden extends Component {
-  render() {
-    const theGarden = this.props.list.map((todo) => {
-      if (todo.complete === false) {
-      return(<img className='grid-item' key={todo.id} src={sprout} alt='sprout'/>)
-    } else {
-      return(<img className='grid-item' key={todo.id} src={pink_flower} alt='pink_flower'/>)
-    }
-    })
-    return(
-      <div className='garden-div grid-container split right'>
-      {theGarden}
-      </div>
-    )
-  }
-}
-
-class ToDo extends Component {
-  render() {
-    const {title, body, url, complete} = this.props.data
-    if (!complete){
-      return(
-        <div className="todo">
-          <h1 className='todo-title'>{title}</h1>
-          <h2 className='todo-body'>{body}</h2>
-          <button onClick={() => this.props.completeClicked(url)}>Complete</button>
-          <button onClick={() => this.props.deleteClicked(url)}>Delete</button>
-        </div>
-      )
-    } else {
-      return(null)
     }
   }
 }
