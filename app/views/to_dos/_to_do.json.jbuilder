@@ -1,4 +1,4 @@
 # frozen_string_literal: true
 
-json.extract! to_do, :id, :garden_id, :title, :body, :complete, :created_at, :updated_at
+json.extract! to_do, :id, :garden_id, :title, :body, :complete, :start_time, :end_time, :type, :created_at, :updated_at
 json.url to_do_url(to_do, format: :json)
