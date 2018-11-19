@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import moment from 'moment'
 import ToDoForm from './todoform'
 import TimedToDoForm from './TimedToDoForm'
 import sprout from './images/sprout.png'
@@ -143,8 +144,8 @@ class ToDo extends Component {
         <div>
           <h1>{title}</h1>
           <h2>{body}</h2>
-          <h3>{start_time}</h3>
-          <h3>{end_time}</h3>
+          <p>{moment(start_time).format("MMM Do YY @ h:mm a")}</p>
+          <p>{moment(end_time).format("MMM Do YY @ h:mm a")}</p>
           <button onClick={() => this.props.completeClicked(url)}>Complete</button>
           <button onClick={() => this.props.deleteClicked(url)}>Delete</button>
         </div>
