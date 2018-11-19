@@ -96,17 +96,9 @@ export default class ToDoList extends Component {
 
       return(
         <div className='to-do-complete'>
-          {/* Load up a ToDoForm component*/}
-          <div className='to-do-form'>
-            <ToDoForm addClicked={(data) => this.postToDo(data)}/>
-          </div>
-          {/* Load up the group of ToDo comps made in line 76*/}
-          <div className='to-do-list'>
-            {todos}
-          </div>
-          <div className='to-do-garden'>
-            <Garden list={this.state.list}/>
-          </div>
+          <ToDoForm addClicked={(data) => this.postToDo(data)}/>
+          {todos}
+          <Garden list={this.state.list}/>
         </div>
       )
     }
