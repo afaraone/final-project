@@ -16,6 +16,11 @@
     "test:debug": "react-scripts --inspect-brk test --runInBand",
     "eject": "react-scripts eject"
   },
+  "jest": {
+    "transformIgnorePatterns": [
+      "node_modules/(?!(react-native|my-project|react-native-button)/)"
+    ]
+  },
   "proxy": "http://localhost:3000",
   "eslintConfig": {
     "extends": "react-app"
