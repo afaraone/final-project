@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import './styles/App.css';
 import ToDoList from './todolist';
-import Google from './google'
+import User from './user'
 
 export default class App extends Component {
   render() {
     return(
       <>
-      <ToDoList />
-      <Google />
+      <User />
       </>
     )
   }

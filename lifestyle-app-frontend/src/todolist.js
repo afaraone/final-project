@@ -16,7 +16,7 @@ export default class ToDoList extends Component {
   // gets all the todos from API
   async getToDos() {
     try {
-      let response = await fetch('/api/to_dos/')
+      let response = await fetch(this.props.url)
       let json = await response.json()
       this.setState({list: json, isLoaded: true})
     } catch (error) {
@@ -56,7 +56,7 @@ export default class ToDoList extends Component {
   async postToDo(data){
     let body = JSON.stringify({to_do: data })
     try {
-      await fetch("/api/to_dos/", {
+      await fetch(this.props.url, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: body

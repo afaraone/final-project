@@ -7,7 +7,8 @@ class ToDosController < ApplicationController
   # GET /to_dos
   # GET /to_dos.json
   def index
-    @to_dos = ToDo.all
+    @user = User.find(params[:user_id])
+    @to_dos = @user.to_dos.all
   end
 
   # GET /to_dos/1
@@ -17,7 +18,8 @@ class ToDosController < ApplicationController
   # POST /to_dos
   # POST /to_dos.json
   def create
-    @to_do = ToDo.new(to_do_params)
+    @user = User.find(params[:user_id])
+    @to_do = @user.to_dos.new(to_do_params)
 
     if @to_do.save
       render :show, status: :created, location: @to_do

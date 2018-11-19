@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {GoogleLogin, GoogleLogout} from 'react-google-login';
-
-export default class Google extends Component {
+import ToDoList from './todolist'
+export default class User extends Component {
     constructor(props) {
       super(props)
       this.state = {
@@ -38,21 +38,27 @@ export default class Google extends Component {
     }
 
   render() {
-    return(
-      <>
-      <GoogleLogin
+    const loggedIn = this.state.loggedIn
+    const toDoUrl = '/api/users/' + this.state.userDetails.id + '/to_dos/'
+    const userDetails = this.state.userDetails
+    if (loggedIn) {
+      return(
+        <>
+        <GoogleLogout
+        buttonText="Logout"
+        onLogoutSuccess={this.logout}/>
+        <ToDoList userDetails={userDetails} url={toDoUrl} />
+        </>
+      )
+    } else {
+      return(
+        <GoogleLogin
         clientId='1079599907119-tgi3sq2anv557ircj50lin80qjqs50o0'
         buttonText='Login'
         onSuccess={this.authLogin}
         onFailure={this.authLogin}
-      />
-
-      <GoogleLogout
-        buttonText="Logout"
-        onLogoutSuccess={this.logout}
-      >
-      </GoogleLogout>
-      </>
-    )
+        />
+      )
+    }
   }
 }
