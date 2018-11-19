@@ -9,26 +9,32 @@ export default class Google extends Component {
         session: '',
         userDetails: {}
       }
+      this.authLogin = this.authLogin.bind(this)
+      this.logout = this.logout.bind(this)
     }
 
     async authLogin(response) {
-      console.log(response);
+      console.log(response)
       let body = JSON.stringify({user: response.profileObj})
-      try {
-        let res = await fetch("/api/users/", {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          body: body
-        })
-        let json = await res.json()
-        console.log(json)
-      } catch (error) {
-        console.log(error)
-      }
+      let res = await fetch("/api/users/", {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: body
+      })
+      let json = await res.json()
+      this.setState({
+        loggedIn: true,
+        userDetails: json,
+        session: response.accessToken
+      })
     }
 
     async logout(response) {
-      console.log(response);
+      this.setState({
+        loggedIn: false,
+        userDetails: {},
+        session: ''
+      })
     }
 
   render() {
