@@ -65,7 +65,6 @@ export default class ToDoList extends Component {
         body: body
       })
       let railsData = await response.json()
-      console.log(railsData)
       if (railsData.type !== "SimpleToDo") {
         this.postToCalendar(railsData)
       }
