@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import {GoogleLogin, GoogleLogout} from 'react-google-login';
 import ToDoList from './todolist'
+import cookie from 'react-cookies'
 export default class User extends Component {
     constructor(props) {
       super(props)
-      this.state = {
+      this.state = { userState: cookie.load("UserCookie") } || { userState: {
         loggedIn: false,
         session: '',
         userDetails: {}
-      }
+      }}
       this.authLogin = this.authLogin.bind(this)
       this.logout = this.logout.bind(this)
     }
@@ -22,25 +23,28 @@ export default class User extends Component {
         body: body
       })
       let json = await res.json()
-      this.setState({
+      this.setState({ userState: {
         loggedIn: true,
         userDetails: json,
         session: response.accessToken
-      })
+      }})
+      cookie.save("UserCookie", this.state.userState, {path: '/'})
     }
 
     async logout(response) {
-      this.setState({
+      console.log('hello')
+      cookie.remove("UserCookie", this.sate.userState)
+      this.setState({ userState: {
         loggedIn: false,
         userDetails: {},
         session: ''
-      })
+      }})
     }
 
   render() {
-    const loggedIn = this.state.loggedIn
-    const toDoUrl = 'http://localhost:3000/api/users/' + this.state.userDetails.id + '/to_dos/'
-    const userDetails = this.state.userDetails
+    const loggedIn = this.state.userState.loggedIn
+    const userDetails = this.state.userState.userDetails
+    const toDoUrl = 'http://localhost:3000/api/users/' + userDetails.id + '/to_dos/'
     if (loggedIn) {
       return(
         <>
