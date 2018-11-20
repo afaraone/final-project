@@ -9,6 +9,7 @@ class ToDosController < ApplicationController
   def index
     @user = User.find(params[:user_id])
     @to_dos = @user.to_dos.all
+    render json: @to_dos.to_json
   end
 
   # GET /to_dos/1
@@ -22,7 +23,7 @@ class ToDosController < ApplicationController
     @to_do = @user.to_dos.new(to_do_params)
 
     if @to_do.save
-      render :show, status: :created, location: @to_do
+      render json: @todo.to_json
     else
       render json: @to_do.errors, status: :unprocessable_entity
     end
@@ -32,7 +33,7 @@ class ToDosController < ApplicationController
   # PATCH/PUT /to_dos/1.json
   def update
     if @to_do.update(to_do_params)
-      render :show, status: :ok, location: @to_do
+      render json: @todo.to_json
     else
       render json: @to_do.errors, status: :unprocessable_entity
     end

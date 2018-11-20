@@ -25,7 +25,8 @@ export default class ToDoList extends Component {
   }
 
   // Sets a todo to complete using PUT req to API
-  async updateToDo(url) {
+  async updateToDo(id) {
+    let url = this.props.url + '/' + id
     let body = JSON.stringify({"to_do": {"complete": true}})
     try {
       await fetch(url, {
@@ -40,7 +41,8 @@ export default class ToDoList extends Component {
   }
 
   // Deletes ToDo by sending DELETE req to API
-  async deleteToDo(url) {
+  async deleteToDo(id) {
+    let url = this.props.url + '/' + id
     try {
       await fetch(url, {
         method: 'DELETE',
@@ -133,14 +135,14 @@ class Garden extends Component {
 
 class ToDo extends Component {
   render() {
-    const {title, body, url, complete} = this.props.data
+    const {title, body, id, complete} = this.props.data
     if (!complete){
       return(
         <div>
           <h1>{title}</h1>
           <h2>{body}</h2>
-          <button onClick={() => this.props.completeClicked(url)}>Complete</button>
-          <button onClick={() => this.props.deleteClicked(url)}>Delete</button>
+          <button onClick={() => this.props.completeClicked(id)}>Complete</button>
+          <button onClick={() => this.props.deleteClicked(id)}>Delete</button>
         </div>
       )
     } else {

@@ -39,7 +39,7 @@ export default class User extends Component {
 
   render() {
     const loggedIn = this.state.loggedIn
-    const toDoUrl = '/api/users/' + this.state.userDetails.id + '/to_dos/'
+    const toDoUrl = 'http://localhost:3000/api/users/' + this.state.userDetails.id + '/to_dos/'
     const userDetails = this.state.userDetails
     if (loggedIn) {
       return(
