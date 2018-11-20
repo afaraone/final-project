@@ -4,6 +4,7 @@ import ToDoForm from './todoform'
 import TimedToDoForm from './TimedToDoForm'
 import sprout from './images/sprout.png'
 import pink_flower from './images/pink_flower.png'
+import dead from './images/dead.png'
 
 
 export default class ToDoList extends Component {
@@ -90,13 +91,24 @@ export default class ToDoList extends Component {
       // Get the list and map each element onto a ToDo component
       const todos = list.map((todo) => {
         // Each ToDo comp is given a key, completeClicked fn and deleteClicked fn
+        if (todo.type === "SimpleToDo") {
           return(
-            <ToDo
+            <SimpleToDo
               key={todo.id} data={todo}
               completeClicked={(url) => this.updateToDo(url)}
               deleteClicked={(url) => this.deleteToDo(url)}
             />
           )
+        }
+        else {
+          return(
+            <TimedToDo
+              key={todo.id} data={todo}
+              completeClicked={(url) => this.updateToDo(url)}
+              deleteClicked={(url) => this.deleteToDo(url)}
+            />
+          )
+        }
       })
 
       return(
@@ -124,10 +136,12 @@ export default class ToDoList extends Component {
 class Garden extends Component {
   render() {
     const theGarden = this.props.list.map((todo) => {
-      if (todo.complete === false) {
-      return(<img class='grid-item' key={todo.id} src={sprout} alt='sprout'/>)
+      if (todo.complete === false && new Date(todo.end_time) < new Date() && todo.end_time !== null) {
+        return(<img class='grid-item' key={todo.id} src={dead} alt='dead'/>)
+      } else if (todo.complete === false) {
+        return(<img class='grid-item' key={todo.id} src={sprout} alt='sprout'/>)
     } else {
-      return(<img class='grid-item' key={todo.id} src={pink_flower} alt='pink_flower'/>)
+        return(<img class='grid-item' key={todo.id} src={pink_flower} alt='pink_flower'/>)
     }
     })
     return(
@@ -138,7 +152,25 @@ class Garden extends Component {
   }
 }
 
-class ToDo extends Component {
+class SimpleToDo extends Component {
+  render() {
+    const {title, body, url, complete} = this.props.data
+    if (!complete){
+      return(
+        <div>
+          <h1>{title}</h1>
+          <h2>{body}</h2>
+          <button onClick={() => this.props.completeClicked(url)}>Complete</button>
+          <button onClick={() => this.props.deleteClicked(url)}>Delete</button>
+        </div>
+      )
+    } else {
+      return(null)
+    }
+  }
+}
+
+class TimedToDo extends Component {
   render() {
     const {title, body, id, complete, start_time, end_time} = this.props.data
     if (!complete){
