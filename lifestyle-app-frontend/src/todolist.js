@@ -28,8 +28,7 @@ export default class ToDoList extends Component {
   }
 
   // Sets a todo to complete using PUT req to API
-  async updateToDo(id) {
-    let url = this.props.url + '/' + id
+  async updateToDo(url) {
     let body = JSON.stringify({"to_do": {"complete": true}})
     try {
       await fetch(url, {
@@ -44,8 +43,7 @@ export default class ToDoList extends Component {
   }
 
   // Deletes ToDo by sending DELETE req to API
-  async deleteToDo(id) {
-    let url = this.props.url + '/' + id
+  async deleteToDo(url) {
     try {
       await fetch(url, {
         method: 'DELETE',
@@ -186,7 +184,7 @@ class SimpleToDo extends Component {
 
 class TimedToDo extends Component {
   render() {
-    const {title, body, id, complete, start_time, end_time} = this.props.data
+    const {title, body, url, complete, start_time, end_time} = this.props.data
     if (!complete){
       return(
         <div>
@@ -194,8 +192,8 @@ class TimedToDo extends Component {
           <h2>{body}</h2>
           <p>{moment(start_time).format("MMM Do YY @ h:mm a")}</p>
           <p>{moment(end_time).format("MMM Do YY @ h:mm a")}</p>
-          <button onClick={() => this.props.completeClicked(id)}>Complete</button>
-          <button onClick={() => this.props.deleteClicked(id)}>Delete</button>
+          <button onClick={() => this.props.completeClicked(url)}>Complete</button>
+          <button onClick={() => this.props.deleteClicked(url)}>Delete</button>
         </div>
       )
     } else {
