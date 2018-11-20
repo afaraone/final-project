@@ -69,6 +69,12 @@ export default class ToDoList extends Component {
     } catch (error) {
       console.log(error)
     }
+    let calendarBody = JSON.stringify({"summary": "test-event2", "start": { "dateTime": "2018-11-22T19:30:00+01:00"}, "end": {"dateTime": "2018-11-22T21:30:00+01:00"}})
+    await fetch('https://www.googleapis.com/calendar/v3/calendars/' + this.props.userDetails.email + '/events', {
+      method: 'POST',
+      headers: {'Authorization': this.props.session, 'Content-Type': 'application/json' },
+      body: calendarBody
+    })
     this.getToDos()
   }
 
