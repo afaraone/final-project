@@ -20,11 +20,7 @@ class ToDosController < ApplicationController
   # POST /to_dos.json
   def create
     @user =   User.find(params[:user_id])
-    @to_do =  if to_do_params[:type] == 'SimpleToDo'
-                @user.simple_to_dos.new(to_do_params)
-              else
-                @user.timed_to_dos.new(to_do_params)
-              end
+    @to_do =  create_helper(to_do_params)
     if @to_do.save
       render :show, status: :created, location: user_to_do_url(@user, @to_do)
     else
@@ -32,9 +28,18 @@ class ToDosController < ApplicationController
     end
   end
 
+  def create_helper(data)
+    if data[:type] == 'SimpleToDo'
+      @user.simple_to_dos.new(data)
+    else
+      @user.timed_to_dos.new(data)
+    end
+  end
+
   # PATCH/PUT /to_dos/1
   # PATCH/PUT /to_dos/1.json
   def update
+    @user = User.find(params[:user_id])
     if @to_do.update(to_do_params)
       render :show, status: :ok, location: user_to_do_url(@user, @to_do)
     else

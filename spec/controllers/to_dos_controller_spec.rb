@@ -76,7 +76,7 @@ RSpec.describe ToDosController, type: :controller do
 
       it 'renders a JSON response with the new to_do' do
         post :create, params: { user_id: user.id, to_do: valid_attributes }, session: valid_session
-        expect(response).to have_http_status(:ok)
+        expect(response).to have_http_status(:created)
         expect(response.content_type).to eq('application/json')
       end
     end
