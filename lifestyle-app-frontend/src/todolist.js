@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import moment from 'moment'
 import ToDoForm from './todoform'
+import TimedToDoForm from './TimedToDoForm'
 import sprout from './images/sprout.png'
 import pink_flower from './images/pink_flower.png'
 
@@ -86,13 +88,13 @@ export default class ToDoList extends Component {
       // Get the list and map each element onto a ToDo component
       const todos = list.map((todo) => {
         // Each ToDo comp is given a key, completeClicked fn and deleteClicked fn
-        return(
-          <ToDo
-            key={todo.id} data={todo}
-            completeClicked={(url) => this.updateToDo(url)}
-            deleteClicked={(url) => this.deleteToDo(url)}
-          />
-        )
+          return(
+            <ToDo
+              key={todo.id} data={todo}
+              completeClicked={(url) => this.updateToDo(url)}
+              deleteClicked={(url) => this.deleteToDo(url)}
+            />
+          )
       })
 
       return(
@@ -100,6 +102,9 @@ export default class ToDoList extends Component {
           {/* Load up a ToDoForm component*/}
           <div className='to-do-form'>
             <ToDoForm addClicked={(data) => this.postToDo(data)}/>
+          </div>
+          <div className='timed-to-do-form'>
+            <TimedToDoForm addClicked={(data) => this.postToDo(data)}/>
           </div>
           {/* Load up the group of ToDo comps made in line 76*/}
           <div className='to-do-list'>
@@ -133,12 +138,14 @@ class Garden extends Component {
 
 class ToDo extends Component {
   render() {
-    const {title, body, url, complete} = this.props.data
+    const {title, body, url, complete, start_time, end_time} = this.props.data
     if (!complete){
       return(
         <div>
           <h1>{title}</h1>
           <h2>{body}</h2>
+          <p>{moment(start_time).format("MMM Do YY @ h:mm a")}</p>
+          <p>{moment(end_time).format("MMM Do YY @ h:mm a")}</p>
           <button onClick={() => this.props.completeClicked(url)}>Complete</button>
           <button onClick={() => this.props.deleteClicked(url)}>Delete</button>
         </div>

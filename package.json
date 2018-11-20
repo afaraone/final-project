@@ -4,7 +4,6 @@
   "description": "[![Build Status](https://travis-ci.com/afaraone/final-project.svg?branch=master)](https://travis-ci.com/afaraone/final-project)",
   "main": "index.js",
   "scripts": {
-    "pretest": "eslint --ignore-path .gitignore .",
     "backend": "rails s",
     "frontend": "cd lifestyle-app-frontend && npm start",
     "go": "concurrently --kill-others \"npm:backend\" \"npm:frontend\"",
