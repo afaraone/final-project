@@ -6,10 +6,12 @@
   "scripts": {
     "backend": "rails s",
     "frontend": "cd lifestyle-app-frontend && npm start",
-    "go": "concurrently --kill-others \"npm:backend\" \"npm:frontend\"",
+    "start": "concurrently --kill-others \"npm:backend\" \"npm:frontend\"",
     "build": "cd lifestyle-app-frontend && npm install && npm run build && cd ..",
     "deploy-front": "cp -a lifestyle-app-frontend/build/. public/",
-    "heroku-postbuild": "npm run build && npm run deploy-front && echo 'Frontend built!'"
+    "heroku-postbuild": "npm run build && npm run deploy-front && echo 'Frontend built!'",
+    "frontend-test": "cd lifestyle-app-frontend && npm test",
+    "test": "rspec && rubocop && npm run frontend-test"
   },
   "repository": {
     "type": "git",

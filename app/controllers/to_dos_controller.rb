@@ -20,16 +20,18 @@ class ToDosController < ApplicationController
   # POST /to_dos.json
   def create
     @user = User.find(params[:user_id])
-    @to_do = if params[:to_do][:type] == 'SimpleToDo'
-               @user.simple_to_dos.new(to_do_params)
-             else
-               @user.timed_to_dos.new(to_do_params)
-             end
+    @to_do = create_helper(to_do_params)
     if @to_do.save
       render json: @todo.to_json
     else
       render json: @to_do.errors, status: :unprocessable_entity
     end
+  end
+
+  def create_helper(details)
+    return @user.simple_to_dos.new(details) if details[:type]
+
+    @user.timed_to_dos.new(details)
   end
 
   # PATCH/PUT /to_dos/1
