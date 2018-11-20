@@ -29,7 +29,7 @@ class ToDosController < ApplicationController
   end
 
   def create_helper(details)
-    return @user.simple_to_dos.new(details) if details[:type] == "SimpleToDo"
+    return @user.simple_to_dos.new(details) if details[:type] == 'SimpleToDo'
 
     @user.timed_to_dos.new(details)
   end
