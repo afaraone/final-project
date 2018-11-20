@@ -17,11 +17,11 @@ class ToDosController < ApplicationController
   # POST /to_dost
   # POST /to_dos.json
   def create
-    if params[:to_do][:type] == 'SimpleToDo'
-      @to_do = SimpleToDo.new(to_do_params)
-    else
-      @to_do = TimedToDo.new(to_do_params)
-    end
+    @to_do = if params[:to_do][:type] == 'SimpleToDo'
+               SimpleToDo.new(to_do_params)
+             else
+               TimedToDo.new(to_do_params)
+             end
 
     if @to_do.save
       render :show, status: :created, location: @to_do
