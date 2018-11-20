@@ -41,6 +41,10 @@ RSpec.describe ToDosController, type: :controller do
     { garden_id: nil, title: nil, body: nil }
   end
 
+  let(:user) do
+    User.create!(name: 'test_name', email: 'test_email')
+  end
+
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # ToDosController. Be sure to keep this updated too.
@@ -49,15 +53,15 @@ RSpec.describe ToDosController, type: :controller do
   describe 'GET #index' do
     it 'returns a success response' do
       # to_do = ToDo.create! valid_attributes
-      get :index, params: {}, session: valid_session
+      get :index, params: { user_id: user.id }, session: valid_session
       expect(response).to be_successful
     end
   end
 
   describe 'GET #show' do
     it 'returns a success response' do
-      to_do = ToDo.create! valid_attributes
-      get :show, params: { id: to_do.to_param }, session: valid_session
+      to_do = user.to_dos.create! valid_attributes
+      get :show, params: { user_id: user.id, id: to_do.to_param }, session: valid_session
       expect(response).to be_successful
     end
   end
@@ -66,21 +70,20 @@ RSpec.describe ToDosController, type: :controller do
     context 'with valid params' do
       it 'creates a new ToDo' do
         expect do
-          post :create, params: { to_do: valid_attributes }, session: valid_session
+          post :create, params: { user_id: user.id, to_do: valid_attributes }, session: valid_session
         end.to change(ToDo, :count).by(1)
       end
 
       it 'renders a JSON response with the new to_do' do
-        post :create, params: { to_do: valid_attributes }, session: valid_session
-        expect(response).to have_http_status(:created)
+        post :create, params: { user_id: user.id, to_do: valid_attributes }, session: valid_session
+        expect(response).to have_http_status(:ok)
         expect(response.content_type).to eq('application/json')
-        expect(response.location).to eq(to_do_url(ToDo.last))
       end
     end
 
     context 'with invalid params' do
       it 'renders a JSON response with errors for the new to_do' do
-        post :create, params: { to_do: invalid_attributes }, session: valid_session
+        post :create, params: { user_id: user.id, to_do: invalid_attributes }, session: valid_session
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.content_type).to eq('application/json')
       end
@@ -94,16 +97,16 @@ RSpec.describe ToDosController, type: :controller do
       end
 
       it 'updates the requested to_do' do
-        to_do = ToDo.create! valid_attributes
-        put :update, params: { id: to_do.to_param, to_do: new_attributes }, session: valid_session
+        to_do = user.to_dos.create! valid_attributes
+        put :update, params: { user_id: user.id, id: to_do.to_param, to_do: new_attributes }, session: valid_session
         to_do.reload
         expect(ToDo.where(title: 'test2').exists?).to be true
       end
 
       it 'renders a JSON response with the to_do' do
-        to_do = ToDo.create! valid_attributes
+        to_do = user.to_dos.create! valid_attributes
 
-        put :update, params: { id: to_do.to_param, to_do: valid_attributes }, session: valid_session
+        put :update, params: { user_id: user.id, id: to_do.to_param, to_do: valid_attributes }, session: valid_session
         expect(response).to have_http_status(:ok)
         expect(response.content_type).to eq('application/json')
       end
@@ -111,9 +114,9 @@ RSpec.describe ToDosController, type: :controller do
 
     context 'with invalid params' do
       it 'renders a JSON response with errors for the to_do' do
-        to_do = ToDo.create! valid_attributes
+        to_do = user.to_dos.create! valid_attributes
 
-        put :update, params: { id: to_do.to_param, to_do: invalid_attributes }, session: valid_session
+        put :update, params: { user_id: user.id, id: to_do.to_param, to_do: invalid_attributes }, session: valid_session
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.content_type).to eq('application/json')
       end
@@ -122,9 +125,9 @@ RSpec.describe ToDosController, type: :controller do
 
   describe 'DELETE #destroy' do
     it 'destroys the requested to_do' do
-      to_do = ToDo.create! valid_attributes
+      to_do = user.to_dos.create! valid_attributes
       expect do
-        delete :destroy, params: { id: to_do.to_param }, session: valid_session
+        delete :destroy, params: { user_id: user.id, id: to_do.to_param }, session: valid_session
       end.to change(ToDo, :count).by(-1)
     end
   end

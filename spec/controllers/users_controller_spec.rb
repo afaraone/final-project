@@ -48,7 +48,7 @@ RSpec.describe UsersController, type: :controller do
 
   describe 'GET #index' do
     it 'returns a success response' do
-      user = User.create! valid_attributes
+      User.create! valid_attributes
       get :index, params: {}, session: valid_session
       expect(response).to be_successful
     end
@@ -80,7 +80,7 @@ RSpec.describe UsersController, type: :controller do
 
     context 'user already exists' do
       it 'renders a JSON response for existing user' do
-        user = User.create! valid_attributes
+        User.create! valid_attributes
         post :create, params: { user: valid_attributes }, session: valid_session
         expect(response.content_type).to eq('application/json')
         expect(response.location).to eq(user_url(User.last))
@@ -102,7 +102,7 @@ RSpec.describe UsersController, type: :controller do
         user = User.create! valid_attributes
         put :update, params: { id: user.to_param, user: new_attributes }, session: valid_session
         user.reload
-        expect(user.email).to eq "new_email"
+        expect(user.email).to eq 'new_email'
       end
 
       it 'renders a JSON response with the user' do
