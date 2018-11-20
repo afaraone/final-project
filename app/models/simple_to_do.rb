@@ -2,5 +2,5 @@
 
 # For regular ToDos with no start time
 class SimpleToDo < ToDo
-  validates :end_time, :start_time, absence: true
+  # validates :start_time, absence: true - fix this!
 end

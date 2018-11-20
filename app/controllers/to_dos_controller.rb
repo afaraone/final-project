@@ -7,7 +7,9 @@ class ToDosController < ApplicationController
   # GET /to_dos
   # GET /to_dos.json
   def index
-    @to_dos = ToDo.all
+    @user = User.find(params[:user_id])
+    @to_dos = @user.to_dos.all
+    render json: @to_dos.to_json
   end
 
   # GET /to_dos/1
@@ -17,24 +19,26 @@ class ToDosController < ApplicationController
   # POST /to_dost
   # POST /to_dos.json
   def create
-    @to_do = if params[:to_do][:type] == 'SimpleToDo'
-               SimpleToDo.new(to_do_params)
-             else
-               TimedToDo.new(to_do_params)
-             end
-
+    @user = User.find(params[:user_id])
+    @to_do = create_helper(to_do_params)
     if @to_do.save
-      render :show, status: :created, location: @to_do
+      render json: @todo.to_json
     else
       render json: @to_do.errors, status: :unprocessable_entity
     end
+  end
+
+  def create_helper(details)
+    return @user.simple_to_dos.new(details) if details[:type]
+
+    @user.timed_to_dos.new(details)
   end
 
   # PATCH/PUT /to_dos/1
   # PATCH/PUT /to_dos/1.json
   def update
     if @to_do.update(to_do_params)
-      render :show, status: :ok, location: @to_do
+      render json: @todo.to_json
     else
       render json: @to_do.errors, status: :unprocessable_entity
     end

@@ -25,67 +25,65 @@ require 'rails_helper'
 # removed from Rails core in Rails 5, but can be added back in via the
 # `rails-controller-testing` gem.
 
-RSpec.describe ToDosController, type: :controller do
+RSpec.describe UsersController, type: :controller do
   before :each do
     request.headers['accept'] = 'application/json'
   end
 
   # This should return the minimal set of attributes required to create a valid
-  # ToDo. As you add validations to ToDo, be sure to
+  # User. As you add validations to User, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) do
-    { garden_id: 1, title: 'test', body: 'test', type: 'SimpleToDo' }
+    { name: 'test_name', email: 'test_email' }
   end
 
   let(:invalid_attributes) do
-    { garden_id: nil, title: nil, body: nil }
-  end
-
-  let(:user) do
-    User.create!(name: 'test_name', email: 'test_email')
+    { name: 'test_name', email: '' }
   end
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
-  # ToDosController. Be sure to keep this updated too.
+  # UsersController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
   describe 'GET #index' do
     it 'returns a success response' do
-      # to_do = ToDo.create! valid_attributes
-      get :index, params: { user_id: user.id }, session: valid_session
+      User.create! valid_attributes
+      get :index, params: {}, session: valid_session
       expect(response).to be_successful
     end
   end
 
   describe 'GET #show' do
     it 'returns a success response' do
-      to_do = user.simple_to_dos.create! valid_attributes
-      get :show, params: { user_id: user.id, id: to_do.to_param }, session: valid_session
+      user = User.create! valid_attributes
+      get :show, params: { id: user.to_param }, session: valid_session
       expect(response).to be_successful
     end
   end
 
   describe 'POST #create' do
     context 'with valid params' do
-      it 'creates a new ToDo' do
+      it 'creates a new User' do
         expect do
-          post :create, params: { user_id: user.id, to_do: valid_attributes }, session: valid_session
-        end.to change(SimpleToDo, :count).by(1)
+          post :create, params: { user: valid_attributes }, session: valid_session
+        end.to change(User, :count).by(1)
       end
 
-      it 'renders a JSON response with the new to_do' do
-        post :create, params: { user_id: user.id, to_do: valid_attributes }, session: valid_session
-        expect(response).to have_http_status(:ok)
+      it 'renders a JSON response with the new user' do
+        post :create, params: { user: valid_attributes }, session: valid_session
+        expect(response).to have_http_status(:created)
         expect(response.content_type).to eq('application/json')
+        expect(response.location).to eq(user_url(User.last))
       end
     end
 
-    context 'with invalid params' do
-      it 'renders a JSON response with errors for the new to_do' do
-        post :create, params: { user_id: user.id, to_do: invalid_attributes }, session: valid_session
-        expect(response).to have_http_status(:unprocessable_entity)
+    context 'user already exists' do
+      it 'renders a JSON response for existing user' do
+        User.create! valid_attributes
+        post :create, params: { user: valid_attributes }, session: valid_session
         expect(response.content_type).to eq('application/json')
+        expect(response.location).to eq(user_url(User.last))
       end
     end
   end
@@ -93,30 +91,34 @@ RSpec.describe ToDosController, type: :controller do
   describe 'PUT #update' do
     context 'with valid params' do
       let(:new_attributes) do
-        { garden_id: 2, title: 'test2', body: 'test2' }
+        { email: 'new_email' }
       end
 
-      it 'updates the requested to_do' do
-        to_do = user.simple_to_dos.create! valid_attributes
-        put :update, params: { user_id: user.id, id: to_do.to_param, to_do: new_attributes }, session: valid_session
-        to_do.reload
-        expect(SimpleToDo.where(title: 'test2').exists?).to be true
+      let(:new_invalid_attributes) do
+        { email: '' }
       end
 
-      it 'renders a JSON response with the to_do' do
-        to_do = user.simple_to_dos.create! valid_attributes
+      it 'updates the requested user' do
+        user = User.create! valid_attributes
+        put :update, params: { id: user.to_param, user: new_attributes }, session: valid_session
+        user.reload
+        expect(user.email).to eq 'new_email'
+      end
 
-        put :update, params: { user_id: user.id, id: to_do.to_param, to_do: valid_attributes }, session: valid_session
+      it 'renders a JSON response with the user' do
+        user = User.create! valid_attributes
+
+        put :update, params: { id: user.to_param, user: valid_attributes }, session: valid_session
         expect(response).to have_http_status(:ok)
         expect(response.content_type).to eq('application/json')
       end
     end
 
     context 'with invalid params' do
-      it 'renders a JSON response with errors for the to_do' do
-        to_do = user.simple_to_dos.create! valid_attributes
+      it 'renders a JSON response with errors for the user' do
+        user = User.create! valid_attributes
 
-        put :update, params: { user_id: user.id, id: to_do.to_param, to_do: invalid_attributes }, session: valid_session
+        put :update, params: { id: user.to_param, user: invalid_attributes }, session: valid_session
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.content_type).to eq('application/json')
       end
@@ -124,11 +126,11 @@ RSpec.describe ToDosController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
-    it 'destroys the requested to_do' do
-      to_do = user.simple_to_dos.create! valid_attributes
+    it 'destroys the requested user' do
+      user = User.create! valid_attributes
       expect do
-        delete :destroy, params: { user_id: user.id, id: to_do.to_param }, session: valid_session
-      end.to change(user.simple_to_dos.all, :count).by(-1)
+        delete :destroy, params: { id: user.to_param }, session: valid_session
+      end.to change(User, :count).by(-1)
     end
   end
 end
