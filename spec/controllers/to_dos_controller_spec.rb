@@ -128,7 +128,7 @@ RSpec.describe ToDosController, type: :controller do
       to_do = user.simple_to_dos.create! valid_attributes
       expect do
         delete :destroy, params: { user_id: user.id, id: to_do.to_param }, session: valid_session
-      end.to change(SimpleToD, :count).by(-1)
+      end.to change(user.simple_to_dos.all, :count).by(-1)
     end
   end
 end
