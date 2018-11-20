@@ -100,7 +100,7 @@ export default class ToDoList extends Component {
             />
           )
         }
-        else {
+        else if (todo.type  === "TimedToDo") {
           return(
             <TimedToDo
               key={todo.id} data={todo}
