@@ -140,7 +140,7 @@ class Garden extends Component {
 
 class ToDo extends Component {
   render() {
-    const {title, body, url, complete, start_time, end_time} = this.props.data
+    const {title, body, id, complete, start_time, end_time} = this.props.data
     if (!complete){
       return(
         <div>
