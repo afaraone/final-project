@@ -74,14 +74,16 @@ export default class ToDoList extends Component {
     this.getToDos()
   }
 
-  async postToCalendar(data) {
-  let calendarBody = JSON.stringify({"summary": data.title, "start": { "dateTime": data.start_time}, "end": {"dateTime": data.end_time}})
-  await fetch('https://www.googleapis.com/calendar/v3/calendars/' + this.props.userDetails.email + '/events', {
-    method: 'POST',
-    headers: {'Authorization': this.props.session, 'Content-Type': 'application/json' },
-    body: calendarBody
-  })
-}
+  postToCalendar(data) {
+    let calendarBody = JSON.stringify({
+      "summary": data.title, "start": { "dateTime": data.start_time},
+      "end": {"dateTime": data.end_time}})
+    fetch('https://www.googleapis.com/calendar/v3/calendars/' + this.props.userDetails.email + '/events', {
+      method: 'POST',
+      headers: {'Authorization': this.props.session, 'Content-Type': 'application/json' },
+      body: calendarBody
+    })
+  }
 
   // Runs automatically when component is loaded
   componentDidMount() {
