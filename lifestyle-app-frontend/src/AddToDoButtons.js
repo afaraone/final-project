@@ -20,7 +20,7 @@ export default class FormHandler extends Component {
           <ToDoForm addClicked={(data) => this.props.postToDo(data)}/>
         </div>
         <div className='timed-to-do-form'>
-          <TimedToDoForm addClicked={(data) => this.postToDo(data)}/>
+          <TimedToDoForm addClicked={(data) => this.props.postToDo(data)}/>
         </div>
         </div>
       )
