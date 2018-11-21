@@ -121,7 +121,7 @@ export default class ToDoList extends Component {
         <div className='to-do-complete'>
           {/* Load up a ToDoForm component*/}
           <div className='add-to-do-buttons'>
-            <FormHandler />
+            <FormHandler postToDo={(data) => this.postToDo(data)} />
           </div>
           {/* Load up the group of ToDo comps made in line 76*/}
           <div className='to-do-list'>

@@ -17,7 +17,7 @@ export default class FormHandler extends Component {
       return (
         <div>
         <div className='to-do-form'>
-          <ToDoForm addClicked={(data) => this.postToDo(data)}/>
+          <ToDoForm addClicked={(data) => this.props.postToDo(data)}/>
         </div>
         <div className='timed-to-do-form'>
           <TimedToDoForm addClicked={(data) => this.postToDo(data)}/>
