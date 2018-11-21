@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import moment from 'moment'
 export default class TimedToDoForm extends Component {
   constructor(props) {
     super(props);
@@ -21,7 +21,7 @@ export default class TimedToDoForm extends Component {
   calculateEndTime() {
     if (this.state.start_time === '' || this.state.duration === '') { return }
     let d = new Date(this.state.start_time)
-    d.setMinutes(d.getMinutes() + this.state.duration)
+    d.setMinutes(d.getMinutes() + parseInt(this.state.duration))
     return d.toISOString()
   }
 
@@ -53,11 +53,13 @@ export default class TimedToDoForm extends Component {
         />
         <input
           onChange={ (e)=> this.changeValue('start_time', e.target.value)}
+          min={moment().format('YYYY-MM-DDTHH:mm')}
           value={this.state.start_time}
           type="datetime-local"
         />
         <input
           onChange={ (e)=> this.changeValue('duration', e.target.value)}
+          min="0"
           value={this.state.duration}
           type="number"
         />
