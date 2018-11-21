@@ -29,7 +29,7 @@ export class SimpleToDo extends Component {
         <button className='delete-button' onClick={() => this.props.deleteClicked(url)}>Delete</button>
         </>
       }
-      {!complete && details && <button onClick={() => this.props.completeClicked(url)}>Complete</button>}
+      {!complete && details && <button className='complete-button' onClick={() => this.props.completeClicked(url)}>Complete</button>}
       </div>
     )
   }
