@@ -68,7 +68,8 @@ export class TimedToDo extends Component {
         <button onClick={() => this.props.deleteClicked(url)}>Delete</button>
         </>
       }
-      {details && !complete && !isLate && <button onClick={() => this.props.completeClicked(url)}>Complete</button>}
+      {details && !complete && !isLate &&
+        <button onClick={() => this.props.completeClicked(url)}>Complete</button>}
       </div>
     )
   }

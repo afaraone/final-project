@@ -43,17 +43,16 @@ export default class User extends Component {
     const loggedIn = this.state.loggedIn
     const toDoUrl = 'http://localhost:3000/api/users/' + this.state.userDetails.id + '/to_dos/'
     const userDetails = this.state.userDetails
-    if (loggedIn) {
-      return(
-        <>
+
+    return(
+      <>
+      <div className='user'>
+      { loggedIn &&
         <GoogleLogout
         buttonText="Logout"
         onLogoutSuccess={this.logout}/>
-        <ToDoHandler userDetails={userDetails} url={toDoUrl} session={this.state.session} />
-        </>
-      )
-    } else {
-      return(
+      }
+      {!loggedIn &&
         <GoogleLogin
         clientId='1079599907119-tgi3sq2anv557ircj50lin80qjqs50o0'
         buttonText='Login'
@@ -61,7 +60,10 @@ export default class User extends Component {
         onSuccess={this.authLogin}
         onFailure={this.authLogin}
         />
-      )
-    }
+      }
+      </div>
+      { loggedIn && <ToDoHandler userDetails={userDetails} url={toDoUrl} session={this.state.session} />}
+      </>
+    )
   }
 }

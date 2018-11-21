@@ -90,25 +90,18 @@ export default class ToDoHandler extends Component {
     const list = this.state.list
     const notLoaded = !(this.state && this.state.isLoaded)
     // If list is not loaded yet(ie before fetch is done) do the following
-    if (notLoaded) {
-      return (
-        <h1>Loading</h1>
-      )
-    }
-
-    else {
-      return(
-        <div className='to-do-complete'>
-          <div className='add-to-do-buttons'>
-            <FormHandler postToDo={(data) => this.postToDo(data)} />
-          </div>
-          <div className='to-do-garden'>
-            <Garden
-             list={this.state.list} updateToDo={(url) => this.updateToDo(url)} deleteToDo={(url) => this.deleteToDo(url)}
-            />
-          </div>
-        </div>
-      )
-    }
+    return(
+      <>
+      { notLoaded && <h1>Loading</h1> }
+      { !notLoaded &&
+        <>
+          <FormHandler postToDo={(data) => this.postToDo(data)} />
+          <Garden
+            list={this.state.list} updateToDo={(url) => this.updateToDo(url)} deleteToDo={(url) => this.deleteToDo(url)}
+          />
+        </>
+      }
+      </>
+    )
   }
 }

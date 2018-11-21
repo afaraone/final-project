@@ -31,7 +31,7 @@ export default class ToDoForm extends Component {
     // prepare vals of textbox to send as a param in POST req to API
     const data = {"title": this.state.title, "body": this.state.body, "type": "SimpleToDo"}
     return(
-      <div>
+      <div className='todo-form' >
         <input
           onChange={ (e)=> this.changeTitle(e.target.value)}
           value={this.state.title}

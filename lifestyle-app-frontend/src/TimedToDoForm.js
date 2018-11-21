@@ -40,7 +40,7 @@ export default class TimedToDoForm extends Component {
                 "end_time": this.calculateEndTime(),
                    "type": "TimedToDo"}
     return(
-      <div>
+      <div className='timed-to-do-form'>
         <input
           onChange={ (e)=> this.changeValue('title', e.target.value)}
           value={this.state.title}
