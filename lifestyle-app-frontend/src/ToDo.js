@@ -6,10 +6,11 @@ import dead from './images/dead.png'
 
 export class SimpleToDo extends Component {
   render() {
-    const {title, body, url, complete} = this.props.data
+    const { title, body, url, complete, end_time } = this.props.data
     if (!complete){
       return(
         <div>
+          <img className='grid-item' src={sprout} alt='sprout'/>
           <h1>{title}</h1>
           <h2>{body}</h2>
           <button onClick={() => this.props.completeClicked(url)}>Complete</button>
@@ -17,7 +18,12 @@ export class SimpleToDo extends Component {
         </div>
       )
     } else {
-      return(null)
+      return(
+        <div>
+        <img className='grid-item' src={pink_flower} alt='pink_flower'/>
+      <h1>{title}</h1>
+      </div>
+    )
     }
   }
 }
@@ -25,9 +31,21 @@ export class SimpleToDo extends Component {
 export class TimedToDo extends Component {
   render() {
     const {title, body, url, complete, start_time, end_time} = this.props.data
-    if (!complete){
+    if (new Date(end_time) < new Date() && end_time !== null){
       return(
         <div>
+          <img className='grid-item' src={dead} alt='dead'/>
+          <h1>{title}</h1>
+          <h2>{body}</h2>
+          <p>{moment(start_time).format("MMM Do YY @ h:mm a")}</p>
+          <p>{moment(end_time).format("MMM Do YY @ h:mm a")}</p>
+          <button onClick={() => this.props.deleteClicked(url)}>Delete</button>
+        </div>
+      )
+    } else if (!complete) {
+      return(
+        <div>
+          <img className='grid-item' src={sprout} alt='sprout'/>
           <h1>{title}</h1>
           <h2>{body}</h2>
           <p>{moment(start_time).format("MMM Do YY @ h:mm a")}</p>
