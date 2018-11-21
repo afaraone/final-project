@@ -40,16 +40,19 @@ export default class TimedToDoForm extends Component {
                 "end_time": this.calculateEndTime(),
                    "type": "TimedToDo"}
     return(
-      <div className='timed-to-do-form'>
+      <div className='timed-to-do-form form'>
         <input
           onChange={ (e)=> this.changeValue('title', e.target.value)}
           value={this.state.title}
           type="text"
+          placeholder="Title"
         />
         <input
           onChange={ (e)=> this.changeValue('body', e.target.value)}
           value={this.state.body}
           type="text"
+          placeholder="Body"
+
         />
         <input
           onChange={ (e)=> this.changeValue('start_time', e.target.value)}
@@ -62,6 +65,8 @@ export default class TimedToDoForm extends Component {
           min="0"
           value={this.state.duration}
           type="number"
+          placeholder="Duration(minutes)"
+
         />
         <button
           onClick={ ()=> {
