@@ -4,9 +4,7 @@
   "private": true,
   "dependencies": {
     "async-wait-until": "^1.2.4",
-    "axios": "^0.18.0",
     "moment": "^2.22.2",
-    "nock": "^10.0.2",
     "react": "^16.6.1",
     "react-dom": "^16.6.1",
     "react-google-login": "^3.2.1",
@@ -16,7 +14,7 @@
   "scripts": {
     "start": "PORT=3001 react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test" : "react-scripts test --env=jsdom --coverage --collectCoverageFrom=src/**/*js --collectCoverageFrom=!src/tests/**",
     "eject": "react-scripts eject"
   },
   "proxy": "http://localhost:3000",
