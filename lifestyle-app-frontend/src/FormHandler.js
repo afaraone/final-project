@@ -20,8 +20,8 @@ export default class FormHandler extends Component {
 
         {formVisible &&
           <div className='all-todo-forms'>
-          <ToDoForm addClicked={(data) => this.props.postToDo(data)} showButton={() => this.showButton()}/>
-          <TimedToDoForm addClicked={(data) => this.props.postToDo(data)} showButton={() => this.showButton()}/>
+          <ToDoForm addClicked={(data) => this.props.postToDo(data)} toggleForm={() => this.toggleForm()}/>
+          <TimedToDoForm addClicked={(data) => this.props.postToDo(data)} toggleForm={() => this.toggleForm()}/>
           </div>
         }
       </>

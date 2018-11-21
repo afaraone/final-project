@@ -48,7 +48,7 @@ export default class ToDoForm extends Component {
         <button
           onClick={ ()=> {
             this.resetForm()
-            this.props.showButton()
+            this.props.toggleForm()
             this.props.addClicked(data)
             }
           }>
