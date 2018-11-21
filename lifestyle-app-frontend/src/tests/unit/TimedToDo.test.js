@@ -26,7 +26,11 @@ describe('When complete is true', () => {
       expect(comp.containsMatchingElement(<img src="sprout.png"/>)).toEqual(true)
     })
 
-    it('renders flower if complete', () => {
-    })
+    // it('renders flower if complete', () => {
+    //   comp = mount(<TimedToDo data={onTimeProp} />)
+    //   comp.find('.grid-item').simulate('click')
+    //   comp.find('.complete-button').simulate('click')
+    //   expect(comp.containsMatchingElement(<img src="pink_flower.png"/>)).toEqual(true)
+    // })
   })
 })
