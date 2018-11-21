@@ -15,7 +15,7 @@ export class SimpleToDo extends Component {
   }
 
   render() {
-    const { title, body, url, complete, end_time } = this.props.data
+    const { title, body, url, complete } = this.props.data
     const details = this.state.details
 
     return (

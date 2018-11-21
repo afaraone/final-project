@@ -97,7 +97,7 @@ export default class ToDoHandler extends Component {
         <>
           <FormHandler postToDo={(data) => this.postToDo(data)} />
           <Garden
-            list={this.state.list} updateToDo={(url) => this.updateToDo(url)} deleteToDo={(url) => this.deleteToDo(url)}
+            list={list} updateToDo={(url) => this.updateToDo(url)} deleteToDo={(url) => this.deleteToDo(url)}
           />
         </>
       }
