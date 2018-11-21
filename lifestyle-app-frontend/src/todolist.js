@@ -6,7 +6,7 @@ import sprout from './images/sprout.png'
 import pink_flower from './images/pink_flower.png'
 import dead from './images/dead.png'
 import FormHandler from './FormHandler'
-import { SimpleToDo, TimedToDo } from './ToDo.js'
+import Garden from './Garden'
 
 
 export default class ToDoList extends Component {
@@ -14,8 +14,7 @@ export default class ToDoList extends Component {
     super(props);
     this.state = {
       list: null,
-      isLoaded: false,
-      viewToDoForm: false
+      isLoaded: false
     }
   }
 
@@ -93,10 +92,6 @@ export default class ToDoList extends Component {
     this.getToDos()
   }
 
-  toggleForm() {
-    this.setState({viewToDoForm: !this.state.viewToDoForm})
-  }
-
   render() {
     const list = this.state.list
     const notLoaded = !(this.state && this.state.isLoaded)
@@ -121,35 +116,5 @@ export default class ToDoList extends Component {
         </div>
       )
     }
-  }
-}
-
-class Garden extends Component {
-  render() {
-    const garden = this.props.list.map((todo) => {
-      if (todo.type === "SimpleToDo") {
-        return(
-          <SimpleToDo
-            key={todo.id} data={todo}
-            completeClicked={(url) => this.props.updateToDo(url)}
-            deleteClicked={(url) => this.props.deleteToDo(url)}
-          />
-        )
-      } else {
-        return(
-          <TimedToDo
-            key={todo.id} data={todo}
-            completeClicked={(url) => this.props.updateToDo(url)}
-            deleteClicked={(url) => this.props.deleteToDo(url)}
-          />
-        )
-      }
-    })
-
-  return(
-      <div>
-        {garden}
-      </div>
-    )
   }
 }
