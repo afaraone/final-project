@@ -142,7 +142,9 @@ export default class ToDoList extends Component {
             {todos}
           </div>
           <div className='to-do-garden'>
-            <Garden list={this.state.list}/>
+            <Garden
+             list={this.state.list} updateToDo={(url) => this.updateToDo(url)} deleteToDo={(url) => this.deleteToDo(url)}
+            />
           </div>
         </div>
       )
@@ -152,18 +154,29 @@ export default class ToDoList extends Component {
 
 class Garden extends Component {
   render() {
-    const theGarden = this.props.list.map((todo) => {
-      if (todo.complete === false && new Date(todo.end_time) < new Date() && todo.end_time !== null) {
-        return(<img className='grid-item' key={todo.id} src={dead} alt='dead'/>)
-      } else if (todo.complete === false) {
-        return(<img className='grid-item' key={todo.id} src={sprout} alt='sprout'/>)
-    } else {
-        return(<img className='grid-item' key={todo.id} src={pink_flower} alt='pink_flower'/>)
-    }
+    const garden = this.props.list.map((todo) => {
+      if (todo.type === "SimpleToDo") {
+        return(
+          <SimpleToDo
+            key={todo.id} data={todo}
+            completeClicked={(url) => this.props.updateToDo(url)}
+            deleteClicked={(url) => this.props.deleteToDo(url)}
+          />
+        )
+      } else {
+        return(
+          <TimedToDo
+            key={todo.id} data={todo}
+            completeClicked={(url) => this.props.updateToDo(url)}
+            deleteClicked={(url) => this.props.deleteToDo(url)}
+          />
+        )
+      }
     })
-    return(
+
+  return(
       <div className='garden-div grid-container split right'>
-      {theGarden}
+      {garden}
       </div>
     )
   }
