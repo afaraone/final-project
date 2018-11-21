@@ -93,7 +93,6 @@ h1 {
 }
 
 .grid-container {
-  /* grid-auto-columns: 15% auto; */
   display: grid;
   grid-gap: auto;
   width: 100%;
