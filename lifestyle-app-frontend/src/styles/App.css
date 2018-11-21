@@ -113,3 +113,9 @@ h1 {
   font-family: Futura;
   font-weight: normal;
 }
+
+.todo-details {
+  position: absolute;
+  background-color: #FFFFFF;
+  margin: 5%
+}
