@@ -117,5 +117,6 @@ h1 {
 .todo-details {
   position: absolute;
   background-color: #FFFFFF;
-  margin: 5%
+  width: 15%;
+  margin-left: 2.5%
 }
