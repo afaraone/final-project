@@ -64,6 +64,7 @@ export default class TimedToDoForm extends Component {
         <button
           onClick={ ()=> {
             this.resetForm()
+            this.props.showButton()
             this.props.addClicked(data)
             }
           }>

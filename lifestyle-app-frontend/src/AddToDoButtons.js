@@ -10,6 +10,11 @@ export default class FormHandler extends Component {
   hideButton() {
     this.setState({showButton: false})
   }
+
+  showButton() {
+    this.setState({showButton: true})
+  }
+
   render() {
     if (this.state.showButton) {
       return(<FormButton hideButton={() => this.hideButton()} />)
@@ -17,10 +22,10 @@ export default class FormHandler extends Component {
       return (
         <div>
         <div className='to-do-form'>
-          <ToDoForm addClicked={(data) => this.props.postToDo(data)}/>
+          <ToDoForm addClicked={(data) => this.props.postToDo(data)} showButton={() => this.showButton()}/>
         </div>
         <div className='timed-to-do-form'>
-          <TimedToDoForm addClicked={(data) => this.props.postToDo(data)}/>
+          <TimedToDoForm addClicked={(data) => this.props.postToDo(data)} showButton={() => this.showButton()}/>
         </div>
         </div>
       )
