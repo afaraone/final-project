@@ -5,7 +5,7 @@ import TimedToDoForm from './TimedToDoForm'
 import sprout from './images/sprout.png'
 import pink_flower from './images/pink_flower.png'
 import dead from './images/dead.png'
-import AddToDoButtons from './AddToDoButtons'
+import FormHandler from './AddToDoButtons'
 
 
 export default class ToDoList extends Component {
@@ -121,13 +121,7 @@ export default class ToDoList extends Component {
         <div className='to-do-complete'>
           {/* Load up a ToDoForm component*/}
           <div className='add-to-do-buttons'>
-            <AddToDoButtons formVisible={this.state.viewForm} addClicked={(data) => this.postToDo(data)} showToDoForm={() => this.toggleForm()}/>
-          </div>
-          <div className='to-do-form'>
-            <ToDoForm addClicked={(data) => this.postToDo(data)}/>
-          </div>
-          <div className='timed-to-do-form'>
-            <TimedToDoForm addClicked={(data) => this.postToDo(data)}/>
+            <FormHandler />
           </div>
           {/* Load up the group of ToDo comps made in line 76*/}
           <div className='to-do-list'>
