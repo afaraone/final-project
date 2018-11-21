@@ -108,38 +108,10 @@ export default class ToDoList extends Component {
     }
 
     else {
-      // Get the list and map each element onto a ToDo component
-      const todos = list.map((todo) => {
-        // Each ToDo comp is given a key, completeClicked fn and deleteClicked fn
-        if (todo.type === "SimpleToDo") {
-          return(
-            <SimpleToDo
-              key={todo.id} data={todo}
-              completeClicked={(url) => this.updateToDo(url)}
-              deleteClicked={(url) => this.deleteToDo(url)}
-            />
-          )
-        }
-        else if (todo.type  === "TimedToDo") {
-          return(
-            <TimedToDo
-              key={todo.id} data={todo}
-              completeClicked={(url) => this.updateToDo(url)}
-              deleteClicked={(url) => this.deleteToDo(url)}
-            />
-          )
-        }
-      })
-
       return(
         <div className='to-do-complete'>
-          {/* Load up a ToDoForm component*/}
           <div className='add-to-do-buttons'>
             <FormHandler postToDo={(data) => this.postToDo(data)} />
-          </div>
-          {/* Load up the group of ToDo comps made in line 76*/}
-          <div className='to-do-list'>
-            {todos}
           </div>
           <div className='to-do-garden'>
             <Garden
@@ -175,8 +147,8 @@ class Garden extends Component {
     })
 
   return(
-      <div className='garden-div grid-container split right'>
-      {garden}
+      <div>
+        {garden}
       </div>
     )
   }
