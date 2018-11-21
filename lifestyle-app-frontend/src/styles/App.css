@@ -46,6 +46,10 @@
   display: inline-block;
 }
 
+h1 {
+  font-weight: normal
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -104,6 +108,9 @@
   width: 100%;
   max-height: 100%;
   padding: 1px;
-  font-size: 30px;
+  font-size: 90%;
   text-align: center;
+  word-break: break-all;
+  font-family: Futura;
+  font-weight: normal;
 }
