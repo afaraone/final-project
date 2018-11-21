@@ -29,9 +29,15 @@ export class SimpleToDo extends Component {
 }
 
 export class TimedToDo extends Component {
+  isLate(date) {
+    return new Date(date) < new Date() && date !== null
+  }
+
   render() {
     const {title, body, url, complete, start_time, end_time} = this.props.data
-    if (new Date(end_time) < new Date() && end_time !== null){
+    const isLate = this.isLate(end_time)
+
+    if (isLate){
       return(
         <div>
           <img className='grid-item' src={dead} alt='dead'/>
@@ -55,7 +61,12 @@ export class TimedToDo extends Component {
         </div>
       )
     } else {
-      return(null)
+      return(
+        <div>
+        <img className='grid-item' src={pink_flower} alt='pink_flower'/>
+          <h1>{title}</h1>
+        </div>
+      )
     }
   }
 }
