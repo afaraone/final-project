@@ -1,15 +1,9 @@
 import React, { Component } from 'react';
-import moment from 'moment'
-import ToDoForm from './todoform'
-import TimedToDoForm from './TimedToDoForm'
-import sprout from './images/sprout.png'
-import pink_flower from './images/pink_flower.png'
-import dead from './images/dead.png'
 import FormHandler from './FormHandler'
 import Garden from './Garden'
 
 
-export default class ToDoList extends Component {
+export default class ToDoHandler extends Component {
   constructor(props){
     super(props);
     this.state = {

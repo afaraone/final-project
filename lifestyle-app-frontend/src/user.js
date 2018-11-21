@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {GoogleLogin, GoogleLogout} from 'react-google-login';
-import ToDoList from './todolist'
+import ToDoHandler from './ToDoHandler'
+
 export default class User extends Component {
     constructor(props) {
       super(props)
@@ -48,7 +49,7 @@ export default class User extends Component {
         <GoogleLogout
         buttonText="Logout"
         onLogoutSuccess={this.logout}/>
-        <ToDoList userDetails={userDetails} url={toDoUrl} session={this.state.session} />
+        <ToDoHandler userDetails={userDetails} url={toDoUrl} session={this.state.session} />
         </>
       )
     } else {
