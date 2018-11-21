@@ -15,11 +15,18 @@ let mockCompleteClicked = jest.fn()
 
 describe('When complete is true', () => {
   let comp
-  beforeEach(() => {
-  })
+  describe('picture rendering', () => {
+    it('renders a corpse to signify overdue ToDo', () => {
+      comp = mount(<TimedToDo data={overdueProp} />)
+      expect(comp.containsMatchingElement(<img src="dead.png"/>)).toEqual(true)
+    })
 
-  it('renders a corpse to signify overdue ToDo', () => {
-    comp = mount(<TimedToDo data={overdueProp} />)
-    expect(comp.containsMatchingElement(<img src="dead.png"/>)).toEqual(true)
+    it('renders sprout if not complete', () => {
+      comp = mount(<TimedToDo data={onTimeProp} />)
+      expect(comp.containsMatchingElement(<img src="sprout.png"/>)).toEqual(true)
+    })
+
+    it('renders flower if complete', () => {
+    })
   })
 })

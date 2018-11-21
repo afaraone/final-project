@@ -65,11 +65,11 @@ export class TimedToDo extends Component {
         <h2>{body}</h2>
         <p>{moment(start_time).format("MMM Do YY @ h:mm a")}</p>
         <p>{moment(end_time).format("MMM Do YY @ h:mm a")}</p>
-        <button onClick={() => this.props.deleteClicked(url)}>Delete</button>
+        <button className='delete-button' onClick={() => this.props.deleteClicked(url)}>Delete</button>
         </>
       }
       {details && !complete && !isLate &&
-        <button onClick={() => this.props.completeClicked(url)}>Complete</button>}
+        <button className='complete-button' onClick={() => this.props.completeClicked(url)}>Complete</button>}
       </div>
     )
   }
