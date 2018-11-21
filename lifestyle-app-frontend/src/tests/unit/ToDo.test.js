@@ -18,17 +18,30 @@ describe('SimpleToDo Unit Test', () => {
     })
 
     it('renders image sprout', () => {
-      expect(comp.contains(<img className="images" src="sprout.png" alt="sprout"/>)).toEqual(true)
+      expect(comp.containsMatchingElement(<img src="sprout.png" />)).toEqual(true)
     })
   })
 
-  describe('renders a flower', () => {
+  describe('When complete is true', () => {
     beforeEach(() => {
       comp = mount(<SimpleToDo data={mockProps2} />)
     })
 
     it('renders a flower to signify completed ToDo', () => {
-      expect(comp.contains(<img className="images" src="pink_flower.png" alt="pink_flower"/>)).toEqual(true)
+      expect(comp.containsMatchingElement(<img src="pink_flower.png"/>)).toEqual(true)
+    })
+  })
+
+  describe('When clicked on, renders body', () => {
+    beforeEach(() => {
+      comp = mount(<SimpleToDo data={mockProps} />)
+      comp.find('.grid-item').simulate('click')
+    })
+    it('Renders body', () => {
+      expect(comp.contains(<h2>mockBody</h2>)).toEqual(true)
+    })
+    it('Renders delete button', () => {
+      expect(comp.containsMatchingElement(<button>Delete</button>)).toEqual(true)
     })
   })
 })
