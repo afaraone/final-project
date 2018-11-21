@@ -19,7 +19,7 @@ export default class TimedToDoForm extends Component {
   }
 
   calculateEndTime() {
-    if (this.state.start_time == '' || this.state.duration == '') { return }
+    if (this.state.start_time === '' || this.state.duration === '') { return }
     let d = new Date(this.state.start_time)
     d.setMinutes(d.getMinutes() + this.state.duration)
     return d.toISOString()

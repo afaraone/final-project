@@ -25,8 +25,9 @@ export default class User extends Component {
       this.setState({
         loggedIn: true,
         userDetails: json,
-        session: response.accessToken
+        session: 'Bearer ' + response.accessToken
       })
+
     }
 
     async logout(response) {
@@ -47,7 +48,7 @@ export default class User extends Component {
         <GoogleLogout
         buttonText="Logout"
         onLogoutSuccess={this.logout}/>
-        <ToDoList userDetails={userDetails} url={toDoUrl} />
+        <ToDoList userDetails={userDetails} url={toDoUrl} session={this.state.session} />
         </>
       )
     } else {
@@ -55,6 +56,7 @@ export default class User extends Component {
         <GoogleLogin
         clientId='1079599907119-tgi3sq2anv557ircj50lin80qjqs50o0'
         buttonText='Login'
+        scope='https://www.googleapis.com/auth/calendar'
         onSuccess={this.authLogin}
         onFailure={this.authLogin}
         />
@@ -62,3 +64,11 @@ export default class User extends Component {
     }
   }
 }
+
+// let auth = 'Bearer ' + this.state.session
+// let calendar = await fetch('https://www.googleapis.com/calendar/v3/users/me/calendarList/andresfaraone@gmail.com',
+// {method: 'GET',
+// headers: {'Authorization': auth}
+// })
+// let calendarjson = await calendar.json()
+// console.log(calendarjson)

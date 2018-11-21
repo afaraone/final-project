@@ -30,8 +30,7 @@ export default class ToDoList extends Component {
   }
 
   // Sets a todo to complete using PUT req to API
-  async updateToDo(id) {
-    let url = this.props.url + '/' + id
+  async updateToDo(url) {
     let body = JSON.stringify({"to_do": {"complete": true}})
     try {
       await fetch(url, {
@@ -46,8 +45,7 @@ export default class ToDoList extends Component {
   }
 
   // Deletes ToDo by sending DELETE req to API
-  async deleteToDo(id) {
-    let url = this.props.url + '/' + id
+  async deleteToDo(url) {
     try {
       await fetch(url, {
         method: 'DELETE',
@@ -63,15 +61,30 @@ export default class ToDoList extends Component {
   async postToDo(data){
     let body = JSON.stringify({to_do: data })
     try {
-      await fetch(this.props.url, {
+      let response = await fetch(this.props.url, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: body
       })
+      let railsData = await response.json()
+      if (railsData.type !== "SimpleToDo") {
+        this.postToCalendar(railsData)
+      }
     } catch (error) {
       console.log(error)
     }
     this.getToDos()
+  }
+
+  postToCalendar(data) {
+    let calendarBody = JSON.stringify({
+      "summary": data.title, "start": { "dateTime": data.start_time},
+      "end": {"dateTime": data.end_time}})
+    fetch('https://www.googleapis.com/calendar/v3/calendars/' + this.props.userDetails.email + '/events', {
+      method: 'POST',
+      headers: {'Authorization': this.props.session, 'Content-Type': 'application/json' },
+      body: calendarBody
+    })
   }
 
   // Runs automatically when component is loaded
@@ -140,11 +153,11 @@ class Garden extends Component {
   render() {
     const theGarden = this.props.list.map((todo) => {
       if (todo.complete === false && new Date(todo.end_time) < new Date() && todo.end_time !== null) {
-        return(<img class='grid-item' key={todo.id} src={dead} alt='dead'/>)
+        return(<img className='grid-item' key={todo.id} src={dead} alt='dead'/>)
       } else if (todo.complete === false) {
-        return(<img class='grid-item' key={todo.id} src={sprout} alt='sprout'/>)
+        return(<img className='grid-item' key={todo.id} src={sprout} alt='sprout'/>)
     } else {
-        return(<img class='grid-item' key={todo.id} src={pink_flower} alt='pink_flower'/>)
+        return(<img className='grid-item' key={todo.id} src={pink_flower} alt='pink_flower'/>)
     }
     })
     return(
@@ -175,7 +188,7 @@ class SimpleToDo extends Component {
 
 class TimedToDo extends Component {
   render() {
-    const {title, body, id, complete, start_time, end_time} = this.props.data
+    const {title, body, url, complete, start_time, end_time} = this.props.data
     if (!complete){
       return(
         <div>
@@ -183,8 +196,8 @@ class TimedToDo extends Component {
           <h2>{body}</h2>
           <p>{moment(start_time).format("MMM Do YY @ h:mm a")}</p>
           <p>{moment(end_time).format("MMM Do YY @ h:mm a")}</p>
-          <button onClick={() => this.props.completeClicked(id)}>Complete</button>
-          <button onClick={() => this.props.deleteClicked(id)}>Delete</button>
+          <button onClick={() => this.props.completeClicked(url)}>Complete</button>
+          <button onClick={() => this.props.deleteClicked(url)}>Delete</button>
         </div>
       )
     } else {

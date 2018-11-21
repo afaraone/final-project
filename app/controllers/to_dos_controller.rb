@@ -2,6 +2,7 @@
 
 # CRUD Controller for ToDos
 class ToDosController < ApplicationController
+  include ActionController::MimeResponds
   before_action :set_to_do, only: %i[show update destroy]
 
   # GET /to_dos
@@ -9,7 +10,6 @@ class ToDosController < ApplicationController
   def index
     @user = User.find(params[:user_id])
     @to_dos = @user.to_dos.all
-    render json: @to_dos.to_json(methods: :type)
   end
 
   # GET /to_dos/1
@@ -19,26 +19,29 @@ class ToDosController < ApplicationController
   # POST /to_dost
   # POST /to_dos.json
   def create
-    @user = User.find(params[:user_id])
-    @to_do = create_helper(to_do_params)
+    @user =   User.find(params[:user_id])
+    @to_do =  create_helper(to_do_params)
     if @to_do.save
-      render json: @todo.to_json(methods: :type)
+      render :show, status: :created, location: user_to_do_url(@user, @to_do)
     else
       render json: @to_do.errors, status: :unprocessable_entity
     end
   end
 
-  def create_helper(details)
-    return @user.simple_to_dos.new(details) if details[:type] == 'SimpleToDo'
-
-    @user.timed_to_dos.new(details)
+  def create_helper(data)
+    if data[:type] == 'SimpleToDo'
+      @user.simple_to_dos.new(data)
+    else
+      @user.timed_to_dos.new(data)
+    end
   end
 
   # PATCH/PUT /to_dos/1
   # PATCH/PUT /to_dos/1.json
   def update
+    @user = User.find(params[:user_id])
     if @to_do.update(to_do_params)
-      render json: @todo.to_json(methods: :type)
+      render :show, status: :ok, location: user_to_do_url(@user, @to_do)
     else
       render json: @to_do.errors, status: :unprocessable_entity
     end
