@@ -16,28 +16,27 @@ export default class FormHandler extends Component {
   }
 
   render() {
-    if (this.state.showButton) {
-      return(<FormButton hideButton={() => this.hideButton()} />)
-    } else {
-      return (
-        <div>
-        <div className='to-do-form'>
+    const showButton = this.state.showButton
+    return(
+      <>
+        {showButton && <FormButton hideButton={() => this.hideButton()} />}
+        {!showButton &&
+          <div className='all-todo-forms'>
           <ToDoForm addClicked={(data) => this.props.postToDo(data)} showButton={() => this.showButton()}/>
-        </div>
-        <div className='timed-to-do-form'>
           <TimedToDoForm addClicked={(data) => this.props.postToDo(data)} showButton={() => this.showButton()}/>
-        </div>
-        </div>
-      )
-    }
+          </div>
+        }
+      </>
+    )
   }
 }
-
 
 class FormButton extends Component {
   render() {
     return(
+      <div className='form-button'>
       <button onClick={() => this.props.hideButton()}>Add ToDo</button>
+      </div>
     )
   }
 }

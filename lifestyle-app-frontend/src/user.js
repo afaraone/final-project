@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {GoogleLogin, GoogleLogout} from 'react-google-login';
-import ToDoList from './todolist'
+import ToDoHandler from './ToDoHandler'
+
 export default class User extends Component {
     constructor(props) {
       super(props)
@@ -42,17 +43,16 @@ export default class User extends Component {
     const loggedIn = this.state.loggedIn
     const toDoUrl = '/api/users/' + this.state.userDetails.id + '/to_dos/'
     const userDetails = this.state.userDetails
-    if (loggedIn) {
-      return(
-        <>
+
+    return(
+      <>
+      <div className='user'>
+      { loggedIn &&
         <GoogleLogout
         buttonText="Logout"
         onLogoutSuccess={this.logout}/>
-        <ToDoList userDetails={userDetails} url={toDoUrl} session={this.state.session} />
-        </>
-      )
-    } else {
-      return(
+      }
+      {!loggedIn &&
         <GoogleLogin
         clientId='1079599907119-tgi3sq2anv557ircj50lin80qjqs50o0'
         buttonText='Login'
@@ -60,15 +60,10 @@ export default class User extends Component {
         onSuccess={this.authLogin}
         onFailure={this.authLogin}
         />
-      )
-    }
+      }
+      </div>
+      { loggedIn && <ToDoHandler userDetails={userDetails} url={toDoUrl} session={this.state.session} />}
+      </>
+    )
   }
 }
-
-// let auth = 'Bearer ' + this.state.session
-// let calendar = await fetch('https://www.googleapis.com/calendar/v3/users/me/calendarList/andresfaraone@gmail.com',
-// {method: 'GET',
-// headers: {'Authorization': auth}
-// })
-// let calendarjson = await calendar.json()
-// console.log(calendarjson)
