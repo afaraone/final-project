@@ -5,13 +5,15 @@ import { SimpleToDo, TimedToDo } from '../../ToDo'
 
 let mockProps = { title: 'mockTitle', body: 'mockBody', url: 'mockUrl', complete: false }
 let mockProps2 = { title: 'mockTitle', body: 'mockBody', url: 'mockUrl', complete: true }
+let mockDeleteClicked = jest.fn()
+
 
 describe('SimpleToDo Unit Test', () => {
   let comp
 
   describe('when complete is false', () => {
     beforeEach(() => {
-      comp = mount(<SimpleToDo data={mockProps} />)
+      comp = mount(<SimpleToDo data={mockProps} deleteClicked={mockDeleteClicked} />)
     })
     it('renders title', () => {
       expect(comp.contains(<h1>mockTitle</h1>)).toEqual(true)
@@ -32,7 +34,7 @@ describe('SimpleToDo Unit Test', () => {
     })
   })
 
-  describe('When clicked on, renders body', () => {
+  describe('When clicked on', () => {
     beforeEach(() => {
       comp = mount(<SimpleToDo data={mockProps} />)
       comp.find('.grid-item').simulate('click')
@@ -42,6 +44,18 @@ describe('SimpleToDo Unit Test', () => {
     })
     it('Renders delete button', () => {
       expect(comp.containsMatchingElement(<button>Delete</button>)).toEqual(true)
+    })
+  })
+
+  describe('clicking callbacks', () => {
+    beforeEach(() => {
+      comp = mount(<SimpleToDo data={mockProps} deleteClicked={mockDeleteClicked} />)
+      comp.find('.grid-item').simulate('click')
+    })
+
+    it('calls deleteClicked when delete button clicked', () => {
+      // comp.find('.delete-button').simulate('click')
+      expect(mockDeleteClicked).toHaveBeenCalled()
     })
   })
 })
