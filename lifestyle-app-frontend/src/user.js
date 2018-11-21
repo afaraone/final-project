@@ -65,11 +65,3 @@ export default class User extends Component {
     }
   }
 }
-
-// let auth = 'Bearer ' + this.state.session
-// let calendar = await fetch('https://www.googleapis.com/calendar/v3/users/me/calendarList/andresfaraone@gmail.com',
-// {method: 'GET',
-// headers: {'Authorization': auth}
-// })
-// let calendarjson = await calendar.json()
-// console.log(calendarjson)

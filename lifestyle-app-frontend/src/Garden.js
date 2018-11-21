@@ -24,7 +24,7 @@ export default class Garden extends Component {
     })
 
   return(
-      <div>
+      <div className="grid-container">
         {garden}
       </div>
     )
