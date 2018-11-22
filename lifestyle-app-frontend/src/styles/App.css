@@ -122,6 +122,11 @@ h1 {
   max-width: 100px;
 }
 
+.calendar-pic {
+  max-height: 10%;
+  max-width: 10%;
+}
+
 .grid-container {
   margin-top: 4%;
   display: grid;
