@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import FormHandler from './FormHandler'
 import Garden from './Garden'
+import Title from './Title'
 
 
 export default class ToDoHandler extends Component {
@@ -96,6 +97,7 @@ export default class ToDoHandler extends Component {
       { !notLoaded &&
         <>
           <FormHandler postToDo={(data) => this.postToDo(data)} />
+          <Title />
           <Garden
             list={list} updateToDo={(url) => this.updateToDo(url)} deleteToDo={(url) => this.deleteToDo(url)}
           />

@@ -24,17 +24,45 @@
 
 .form-button button {
   background-color: #4CAF50;
-    color: white;
-    text-align: center;
-    font-size: 16px;
-    margin-left: 10%;
-    width: 190px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    border-radius: 2px;
-    border: 1px solid transparent;
-    font-weight: bold;
-    font-family: Roboto;
+  color: white;
+  text-align: center;
+  font-size: 16px;
+  margin-left: 10%;
+  width: 190px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 2px;
+  border: 1px solid transparent;
+  font-weight: bold;
+  font-family: Roboto;
+}
+
+.all-todo-forms {
+  position: absolute;
+}
+
+.form input {
+  width: 20%;
+  height: 20px;
+  border-radius: 2px;
+  border: 1px solid transparent;
+  margin-bottom: 2%;
+  margin-right: 1%;
+}
+.form button {
+  height: 25px;
+  border-radius: 2px;
+  background-color: #4CAF50;
+  color: white;
+  border: 1px solid transparent;
+  display: inline;
+}
+.title-div {
+  min-height: 10vh;
+  display: inline-block;
+  font-size: 200%;
+  color: #4CAF50;
+  margin-left: 12%;
 
 }
 
@@ -95,6 +123,7 @@ h1 {
 }
 
 .grid-container {
+  margin-top: 4%;
   display: grid;
   grid-gap: auto;
   width: 100%;
