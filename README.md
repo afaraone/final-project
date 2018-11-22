@@ -74,6 +74,9 @@ ReactNative
 
 <img width="865" alt="screenshot 2018-11-22 at 11 41 36" src="https://user-images.githubusercontent.com/41509062/48910354-a3167400-ee67-11e8-9bb2-2986f7e0f516.png">
 
+![alt text](https://github.com/T-Miller0/models/blob/master/Auth%20Token%20flow%20Garden%20ToDo.png)
+
+
 ## Screenshots
 
 To be inserted when the program is finished.
