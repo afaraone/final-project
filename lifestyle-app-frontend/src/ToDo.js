@@ -59,9 +59,9 @@ export class TimedToDo extends Component {
 
     return(
       <div className='grid-item' onClick={() => this.toggleDetails()}>
-      {isLate && <img className="images" src={dead} alt='dead'/>}
+      {isLate && !complete && <img className="images" src={dead} alt='dead'/>}
       {!isLate && !complete && <img className="images" src={sprout} alt='sprout'/>}
-      {!isLate && complete && <img className="images" src={pink_flower} alt='pink_flower'/> }
+      {complete && <img className="images" src={pink_flower} alt='pink_flower'/> }
       <h1>{title}</h1>
 
       <div className='todo-details'>
@@ -71,9 +71,8 @@ export class TimedToDo extends Component {
           <p>{moment(start_time).format("MMM Do YY @ h:mm a")}</p>
           <p>{moment(end_time).format("MMM Do YY @ h:mm a")}</p>
           <button className='delete-button' onClick={() => this.props.deleteClicked(url)}>Delete</button>
-          </>
-        }
-        {details && !complete && !isLate &&
+          </>}
+        {details && !complete &&
           <button className='complete-button' onClick={() => this.props.completeClicked(url)}>Complete</button>}
       </div>
       </div>
