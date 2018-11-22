@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ToDoForm from './todoform'
 import TimedToDoForm from './TimedToDoForm'
 
-export default class FormHandler extends Component {
+export class FormHandler extends Component {
   constructor(props) {
     super(props)
     this.state = { formVisible: false }
@@ -29,7 +29,7 @@ export default class FormHandler extends Component {
   }
 }
 
-class FormButton extends Component {
+export class FormButton extends Component {
   render() {
     return(
       <div className='form-button'>

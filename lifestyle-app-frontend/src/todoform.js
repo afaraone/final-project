@@ -33,6 +33,7 @@ export default class ToDoForm extends Component {
     return(
       <div className='todo-form form' >
         <input
+          id='simple-title-text-box'
           onChange={ (e)=> this.changeTitle(e.target.value)}
           value={this.state.title}
           type="text"
@@ -40,6 +41,7 @@ export default class ToDoForm extends Component {
           maxlength='30'
         />
         <input
+          id='simple-body-text-box'
           onChange={ (e)=> this.changeBody(e.target.value)}
           value={this.state.body}
           type="text"
@@ -48,6 +50,7 @@ export default class ToDoForm extends Component {
         />
 
         <button
+          id='simple-submit'
           onClick={ ()=> {
             this.resetForm()
             this.props.toggleForm()

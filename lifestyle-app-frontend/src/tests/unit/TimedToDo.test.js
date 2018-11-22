@@ -9,7 +9,8 @@ tomorrow.setDate(tomorrow.getDate() + 1);
 
 
 let onTimeProp = { title: 'mockTitle', body: 'mockBody', url: 'mockUrl', complete: false, start_time: yesterday, end_time: tomorrow }
-let overdueProp = { title: 'mockTitle', body: 'mockBody', url: 'mockUrl', complete: false, start_time: yesterday, end_time: yesterday}
+let overdueProp = { title: 'mockTitle', body: 'mockBody', url: 'mockUrl', complete: false, start_time: yesterday, end_time: yesterday }
+let dueTimeProp = { title: 'mockTitle', body: 'mockBody', url: 'mockUrl', complete: true, start_time: yesterday, end_time: tomorrow }
 let mockDeleteClicked = jest.fn()
 let mockCompleteClicked = jest.fn()
 
@@ -26,11 +27,22 @@ describe('When complete is true', () => {
       expect(comp.containsMatchingElement(<img src="sprout.png"/>)).toEqual(true)
     })
 
-    // it('renders flower if complete', () => {
-    //   comp = mount(<TimedToDo data={onTimeProp} />)
-    //   comp.find('.grid-item').simulate('click')
-    //   comp.find('.complete-button').simulate('click')
-    //   expect(comp.containsMatchingElement(<img src="pink_flower.png"/>)).toEqual(true)
-    // })
+    it('renders flower if complete', () => {
+      comp = mount(<TimedToDo data={dueTimeProp} />)
+      comp.find('.grid-item').simulate('click')
+      expect(comp.containsMatchingElement(<img src="pink_flower.png"/>)).toEqual(true)
+    })
+    it('calls deleteClicked when delete button clicked', () => {
+      comp = mount(<TimedToDo data={onTimeProp} deleteClicked={mockDeleteClicked} />)
+      comp.find('.grid-item').simulate('click')
+      comp.find('.delete-button').simulate('click')
+      expect(mockDeleteClicked).toHaveBeenCalled()
+    })
+    it('calls completeClicked when completebutton clicked', () => {
+      comp = mount(<TimedToDo data={onTimeProp} completeClicked={mockCompleteClicked} />)
+      comp.find('.grid-item').simulate('click')
+      comp.find('.complete-button').simulate('click')
+      expect(mockCompleteClicked).toHaveBeenCalled()
+    })
   })
 })

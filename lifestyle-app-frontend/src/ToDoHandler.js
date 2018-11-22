@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import FormHandler from './FormHandler'
+import { FormHandler } from './FormHandler'
 import Garden from './Garden'
 import Title from './Title'
 
