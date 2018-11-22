@@ -37,12 +37,14 @@ export default class ToDoForm extends Component {
           value={this.state.title}
           type="text"
           placeholder="Title"
+          maxlength='30'
         />
         <input
           onChange={ (e)=> this.changeBody(e.target.value)}
           value={this.state.body}
           type="text"
           placeholder="Body"
+          maxlength='200'
         />
 
         <button
