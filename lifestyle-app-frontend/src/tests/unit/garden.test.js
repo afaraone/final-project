@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { shallow, mount } from '../../setupTests';
 
-import Garden from '../../garden';
+import Garden from '../../Garden';
 import { SimpleToDo, TimedToDo } from '../../ToDo.js'
 
 let list = [{id: 1, type: "SimpleToDo" },
