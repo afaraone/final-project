@@ -30,7 +30,8 @@
   "devDependencies": {
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.7.0",
-    "jest-fetch-mock": "^1.7.4"
+    "jest-fetch-mock": "^1.7.4",
+    "nock": "^10.0.2"
   },
   "cov": "--collectCoverageFrom=src/**/*js --collectCoverageFrom=!src/tests/** --collectCoverageFrom=!src/index.js --collectCoverageFrom=!src/serviceWorker.js --collectCoverageFrom=!src/setupTests.js"
 }
