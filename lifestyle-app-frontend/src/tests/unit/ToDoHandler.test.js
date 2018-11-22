@@ -5,19 +5,19 @@ import FormHandler from '../../FormHandler'
 import Garden from '../../Garden'
 import Title from '../../Title'
 
-let mockToDos = [{title: "mockTitle", body: "mockBody"}, {title: "mockTitle", body: "mockBody"}]
 let userDetails = {name: "mockName", email: "mockEmail"}
 let session = "mockSesssion"
 
 describe('ToDoHandler', () => {
   let comp
   beforeEach(() => {
-    global.fetch = jest.fn().mockImplementation(() => mockToDos)
+    let mockToDos = [{title: "mockTitle", body: "mockBody"}, {title: "mockTitle", body: "mockBody"}]
+    let mockJson = {json: () => mockToDos}
+    global.fetch = jest.fn().mockImplementation(() => mockJson)
     comp = shallow(<ToDoHandler userDetails={userDetails} session={session} />)
   })
 
   it('loads all todos to list', () => {
-    expect(comp.state('list')).toEqual(mockToDos)
     expect(comp.state('isLoaded')).toEqual(true)
   })
 

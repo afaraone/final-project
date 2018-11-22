@@ -17,12 +17,12 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-
     if @user.save
-      render :show, status: :created, location: @user
+      render :show, status: :created, formats: [:json], location: @user
     elsif (@user = User.find_by(email: params[:user][:email]))
-      render :show, status: :show, location: @user
+      render :show, status: :show, formats: [:json], location: @user
     else
+      p 'woop'
       render json: @user.errors, status: :unprocessable_entity
     end
   end
