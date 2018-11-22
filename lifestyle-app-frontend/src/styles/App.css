@@ -67,7 +67,7 @@
 .title-div {
   min-height: 10vh;
   display: inline-block;
-  font-size: 300%;
+  font-size: 250%;
   color: #4CAF50;
   margin-left: 12%;
   font-family: eightBit;
@@ -132,7 +132,7 @@ h1 {
 }
 
 .grid-container {
-  margin-top: 4%;
+  margin-top: 6%;
   display: grid;
   grid-gap: auto;
   width: 100%;
@@ -169,4 +169,8 @@ body {
   background-size: 50%;
   color: maroon;
   border-radius: 10px;
+}
+
+.todo-details button {
+  font-family: eightBit;
 }
