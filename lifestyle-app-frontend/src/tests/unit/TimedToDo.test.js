@@ -11,8 +11,6 @@ tomorrow.setDate(tomorrow.getDate() + 1);
 let onTimeProp = { title: 'mockTitle', body: 'mockBody', url: 'mockUrl', complete: false, start_time: yesterday, end_time: tomorrow }
 let overdueProp = { title: 'mockTitle', body: 'mockBody', url: 'mockUrl', complete: true, start_time: yesterday, end_time: yesterday }
 let dueTimeProp = { title: 'mockTitle', body: 'mockBody', url: 'mockUrl', complete: true, start_time: yesterday, end_time: tomorrow }
-
-
 let mockDeleteClicked = jest.fn()
 let mockCompleteClicked = jest.fn()
 

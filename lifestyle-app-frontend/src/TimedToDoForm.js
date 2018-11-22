@@ -40,18 +40,21 @@ export default class TimedToDoForm extends Component {
                 "end_time": this.calculateEndTime(),
                    "type": "TimedToDo"}
     return(
-      <div className='timed-to-do-form'>
+      <div className='timed-to-do-form form'>
         <input
           id='timed-title-text-box'
           onChange={ (e)=> this.changeValue('title', e.target.value)}
           value={this.state.title}
           type="text"
+          placeholder="Title"
         />
         <input
           id='timed-body-text-box'
           onChange={ (e)=> this.changeValue('body', e.target.value)}
           value={this.state.body}
           type="text"
+          placeholder="Body"
+
         />
         <input
           id='timed-calendar'
@@ -66,12 +69,14 @@ export default class TimedToDoForm extends Component {
           min="0"
           value={this.state.duration}
           type="number"
+          placeholder="Duration(minutes)"
+
         />
         <button
           id='timed-submit'
           onClick={ ()=> {
             this.resetForm()
-            this.props.showButton()
+            this.props.toggleForm()
             this.props.addClicked(data)
             }
           }>

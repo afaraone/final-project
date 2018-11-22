@@ -5,25 +5,23 @@ import TimedToDoForm from './TimedToDoForm'
 export class FormHandler extends Component {
   constructor(props) {
     super(props)
-    this.state = { showButton: true }
-  }
-  hideButton() {
-    this.setState({showButton: false})
+    this.state = { formVisible: false }
   }
 
-  showButton() {
-    this.setState({showButton: true})
+  toggleForm() {
+    this.setState({formVisible: !this.state.formVisible})
   }
 
   render() {
-    const showButton = this.state.showButton
+    const formVisible = this.state.formVisible
     return(
       <>
-        {showButton && <FormButton hideButton={() => this.hideButton()} />}
-        {!showButton &&
+        <FormButton toggleForm={() => this.toggleForm()} />
+
+        {formVisible &&
           <div className='all-todo-forms'>
-          <ToDoForm addClicked={(data) => this.props.postToDo(data)} showButton={() => this.showButton()}/>
-          <TimedToDoForm addClicked={(data) => this.props.postToDo(data)} showButton={() => this.showButton()}/>
+          <ToDoForm addClicked={(data) => this.props.postToDo(data)} toggleForm={() => this.toggleForm()}/>
+          <TimedToDoForm addClicked={(data) => this.props.postToDo(data)} toggleForm={() => this.toggleForm()}/>
           </div>
         }
       </>
@@ -35,7 +33,7 @@ export class FormButton extends Component {
   render() {
     return(
       <div className='form-button'>
-      <button onClick={() => this.props.hideButton()}>Add ToDo</button>
+      <button onClick={() => this.props.toggleForm()}>Add ToDo</button>
       </div>
     )
   }
