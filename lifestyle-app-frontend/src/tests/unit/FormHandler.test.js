@@ -10,8 +10,7 @@ let mockPostToDo = jest.fn()
 
 describe('FormHandler', () => {
   let comp
-  let spyHideButton
-  let spyShowButton
+  let spyToggleForm
 
   beforeEach(() => {
     comp = mount(<FormHandler postToDo={mockPostToDo} />)
@@ -23,16 +22,16 @@ describe('FormHandler', () => {
     })
 
     it('Formbutton hidebutton calls spy', () => {
-      spyHideButton = spyOn(comp.instance(), 'hideButton')
-      comp.find(FormButton).prop('hideButton')()
-      expect(spyHideButton).toHaveBeenCalled()
+      spyToggleForm = spyOn(comp.instance(), 'toggleForm')
+      comp.find(FormButton).prop('toggleForm')()
+      expect(spyToggleForm).toHaveBeenCalled()
     })
   })
 
   describe('after button clicked', () => {
     beforeEach(() => {
       comp.find(FormButton).find('button').simulate('click')
-      spyShowButton = spyOn(comp.instance(), 'showButton')
+      spyToggleForm = spyOn(comp.instance(), 'toggleForm')
     })
 
     it('renders TimedtoDo and ToDoForm', () => {
@@ -51,29 +50,29 @@ describe('FormHandler', () => {
     })
 
     it('TimedToDoForm hidebutton fn calls spy', () => {
-      comp.find(TimedToDoForm).prop('showButton')()
-      expect(spyShowButton).toHaveBeenCalled()
+      comp.find(TimedToDoForm).prop('toggleForm')()
+      expect(spyToggleForm).toHaveBeenCalled()
     })
 
     it('ToDoForm hidebutton fn calls spy', () => {
-      comp.find(ToDoForm).prop('showButton')()
-      expect(spyShowButton).toHaveBeenCalled()
+      comp.find(ToDoForm).prop('toggleForm')()
+      expect(spyToggleForm).toHaveBeenCalled()
     })
   })
 })
 
 
-let mockHideButton = jest.fn()
+let mockToggleForm = jest.fn()
 
 describe('FormButton', () => {
   let comp
 
   beforeEach(() => {
-    comp = mount(<FormButton hideButton={mockHideButton} />)
+    comp = mount(<FormButton toggleForm={mockToggleForm} />)
   })
 
   it('calls mockHideButton when clicked', () => {
     comp.find('button').simulate('click')
-    expect(mockHideButton).toHaveBeenCalled()
+    expect(mockToggleForm).toHaveBeenCalled()
   })
 })

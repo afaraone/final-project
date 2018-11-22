@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { shallow, mount } from '../../setupTests';
 import TimedToDoForm from '../../TimedToDoForm'
 
-let mockShowButton = jest.fn()
+let mockToggleForm = jest.fn()
 let mockAddClicked = jest.fn()
 
 describe('timedTimedToDoForm', () => {
   let comp
   beforeEach(() => {
-    comp = mount(<TimedToDoForm showButton={mockShowButton} addClicked={mockAddClicked} />)
+    comp = mount(<TimedToDoForm toggleForm={mockToggleForm} addClicked={mockAddClicked} />)
   })
 
   describe('input', () => {
@@ -42,8 +42,8 @@ describe('timedTimedToDoForm', () => {
       expect(comp.state('duration')).toEqual('')
     })
 
-    it('calls mockShowButton', () => {
-      expect(mockShowButton).toHaveBeenCalled()
+    it('calls mockToggleForm', () => {
+      expect(mockToggleForm).toHaveBeenCalled()
     })
 
     it('calls mockAddClicked', () => {

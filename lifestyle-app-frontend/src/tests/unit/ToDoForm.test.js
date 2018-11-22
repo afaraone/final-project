@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { shallow, mount } from '../../setupTests';
 import ToDoForm from '../../todoform'
 
-let mockShowButton = jest.fn()
+let mockToggleForm = jest.fn()
 let mockAddClicked = jest.fn()
 
 describe('SimpleToDoForm', () => {
   let comp
   beforeEach(() => {
-    comp = mount(<ToDoForm showButton={mockShowButton} addClicked={mockAddClicked} />)
+    comp = mount(<ToDoForm toggleForm={mockToggleForm} addClicked={mockAddClicked} />)
   })
 
   describe('input', () => {
@@ -36,7 +36,7 @@ describe('SimpleToDoForm', () => {
     })
 
     it('calls mockShowButton', () => {
-      expect(mockShowButton).toHaveBeenCalled()
+      expect(mockToggleForm).toHaveBeenCalled()
     })
 
     it('calls mockAddClicked', () => {
