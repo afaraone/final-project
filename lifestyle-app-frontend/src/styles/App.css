@@ -47,7 +47,8 @@
 }
 
 h1 {
-  font-weight: normal
+  font-weight: normal;
+  color: #4CAF50;
 }
 
 @keyframes App-logo-spin {
@@ -125,5 +126,9 @@ body {
   position: absolute;
   background-color: #FFFFFF;
   width: 15%;
-  margin-left: 2.5%
+  margin-left: 2.5%;
+  background-image: url('../images/grass.png');
+  background-size: 50%;
+  color: maroon;
+  border-radius: 10px;
 }
