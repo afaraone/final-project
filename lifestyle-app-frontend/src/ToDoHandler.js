@@ -17,8 +17,7 @@ export default class ToDoHandler extends Component {
   async getToDos() {
     try {
       let response = await fetch(this.props.url)
-      let json = await response.json()
-      this.setState({list: json, isLoaded: true})
+      this.setState({list: response, isLoaded: true})
     } catch (error) {
       console.log(error)
     }
