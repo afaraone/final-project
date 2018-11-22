@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.com/afaraone/final-project.svg?branch=master)](https://travis-ci.com/afaraone/final-project)
 [![Code Climate](https://codeclimate.com/github/codeclimate/codeclimate/badges/gpa.svg)](https://codeclimate.com/github/afaraone/final-project)
-[![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/Naereen/StrapDown.js/blob/master/LICENSE)
+[![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/djstephenson7)
 [![ForTheBadge built-with-love](http://ForTheBadge.com/images/badges/built-with-love.svg)](https://github.com/djstephenson7)
 
 
@@ -69,6 +69,10 @@ Ruby on Rails
 Nodejs
 React
 ReactNative
+
+## How it works
+
+<img width="865" alt="screenshot 2018-11-22 at 11 41 36" src="https://user-images.githubusercontent.com/41509062/48910354-a3167400-ee67-11e8-9bb2-2986f7e0f516.png">
 
 ## Screenshots
 
