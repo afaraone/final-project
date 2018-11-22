@@ -3,7 +3,7 @@ import { SimpleToDo, TimedToDo } from './ToDo.js'
 
 export default class Garden extends Component {
   render() {
-    const garden = this.props.list.map((todo) => {
+    const garden = this.props.list.reverse().map((todo) => {
       if (todo.type === "SimpleToDo") {
         return(
           <SimpleToDo
