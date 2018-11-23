@@ -44,7 +44,7 @@ describe('SimpleToDo Unit Test', () => {
       expect(comp.contains(<h2>mockBody</h2>)).toEqual(true)
     })
     it('Renders delete button', () => {
-      expect(comp.containsMatchingElement(<button>Delete</button>)).toEqual(true)
+      expect(comp.containsMatchingElement(<span>🗑️</span>)).toEqual(true)
     })
   })
 
