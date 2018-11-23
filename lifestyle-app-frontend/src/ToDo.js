@@ -30,9 +30,9 @@ export class SimpleToDo extends Component {
           <>
           <h2>{body}</h2>
           {!complete && details &&
-            <button className='complete-button' onClick={() => this.props.completeClicked(url)}>Complete</button>
+            <span className='complete-button' onClick={() => this.props.completeClicked(url)}>✅</span>
           }
-          <button className='delete-button' onClick={() => this.props.deleteClicked(url)}>Delete</button>
+          <span className='delete-button' onClick={() => this.props.deleteClicked(url)}>🗑️</span>
           </>
         }
 
@@ -76,9 +76,9 @@ export class TimedToDo extends Component {
           <p>{moment(end_time).format("MMM Do YY @ h:mm a")}</p>
           {details && <a href={calendar}><span>📅</span></a>}
           {details && !complete &&
-            <button className='complete-button' onClick={() => this.props.completeClicked(url)}>Complete</button>
+           <span className='complete-button' onClick={() => this.props.completeClicked(url)}>✅</span>
           }
-          <button className='delete-button' onClick={() => this.props.deleteClicked(url)}>Delete</button>
+          <span className='delete-button' onClick={() => this.props.deleteClicked(url)}>🗑️</span>
           </>}
       </div>
       </div>
