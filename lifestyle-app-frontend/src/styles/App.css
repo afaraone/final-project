@@ -179,3 +179,7 @@ body {
 .todo-details button {
   font-family: eightBit;
 }
+
+span {
+  background-image: url('../images/grass.png');
+}
