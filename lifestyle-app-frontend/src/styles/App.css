@@ -182,4 +182,7 @@ body {
 
 span {
   background-image: url('../images/grass.png');
+  display: inline block;
+  font-size: 150%;
+  margin-right: 5%;
 }
