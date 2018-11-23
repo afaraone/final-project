@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_19_164607) do
+ActiveRecord::Schema.define(version: 2018_11_22_174632) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 2018_11_19_164607) do
     t.datetime "updated_at", null: false
     t.boolean "complete", default: false
     t.integer "user_id"
+    t.string "calendar"
   end
 
   create_table "users", force: :cascade do |t|
