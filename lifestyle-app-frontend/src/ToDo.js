@@ -34,7 +34,7 @@ export class SimpleToDo extends Component {
             <span className='complete-button' onClick={() => this.props.completeClicked(url)}>✅</span>
           }
 
-          <span className='delete-button' onClick={() => this.props.deleteClicked(url)}>🗑️</span>
+          <span className='delete-button' onClick={() => this.props.deleteClicked(data)}>🗑️</span>
 
           </>
         }
@@ -82,7 +82,7 @@ export class TimedToDo extends Component {
           {details && !complete &&
            <span className='complete-button' onClick={() => this.props.completeClicked(url)}>✅</span>
           }
-          <span className='delete-button' onClick={() => this.props.deleteClicked(url)}>🗑️</span>
+          <span className='delete-button' onClick={() => this.props.deleteClicked(data)}>🗑️</span>
           </>}
       </div>
       </div>
