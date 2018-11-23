@@ -45,7 +45,7 @@ Style/MixinUsage:
 # Configuration parameters: AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, IgnoredPatterns.
 # URISchemes: http, https
 Metrics/LineLength:
-  Max: 130
+  Max: 140
 
 Metrics/BlockLength:
   Exclude:
