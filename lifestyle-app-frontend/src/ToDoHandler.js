@@ -61,9 +61,10 @@ export default class ToDoHandler extends Component {
         headers: {'Content-Type': 'application/json'},
         body: body
       })
-      let railsData = await response.json()
-      if (railsData.type !== "SimpleToDo") {
-        this.postToCalendar(railsData)
+      let todoObj = await response.json()
+      if (todoObj.type !== "SimpleToDo") {
+        let calendarUrl = await this.postToCalendar(todoObj)
+        this.putCalendarUrl(todoObj, calendarUrl)
       }
     } catch (error) {
       console.log(error)
@@ -71,15 +72,25 @@ export default class ToDoHandler extends Component {
     this.getToDos()
   }
 
-  postToCalendar(data) {
+  async putCalendarUrl(todo, calendarUrl) {
+    fetch(todo.url, {
+      method: 'PUT',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({"to_do": {"calendar": calendarUrl}})
+    })
+  }
+
+  async postToCalendar(data) {
     let calendarBody = JSON.stringify({
       "summary": data.title, "start": { "dateTime": data.start_time},
       "end": {"dateTime": data.end_time}})
-    fetch('https://www.googleapis.com/calendar/v3/calendars/' + this.props.userDetails.email + '/events', {
+    let response = await fetch('https://www.googleapis.com/calendar/v3/calendars/' + this.props.userDetails.email + '/events', {
       method: 'POST',
       headers: {'Authorization': this.props.session, 'Content-Type': 'application/json' },
       body: calendarBody
     })
+    let json = await response.json()
+    return json.htmlLink
   }
 
   // Runs automatically when component is loaded

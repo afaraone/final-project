@@ -3,6 +3,7 @@ import moment from 'moment'
 import sprout from './images/sprout.png'
 import pink_flower from './images/pink_flower.png'
 import dead from './images/dead.png'
+import calendarpic from './images/calendarpic.png'
 
 export class SimpleToDo extends Component {
   constructor(props) {
@@ -28,7 +29,7 @@ export class SimpleToDo extends Component {
         {details &&
           <>
           <h2>{body}</h2>
-          {!complete && details && 
+          {!complete && details &&
             <button className='complete-button' onClick={() => this.props.completeClicked(url)}>Complete</button>
           }
           <button className='delete-button' onClick={() => this.props.deleteClicked(url)}>Delete</button>
@@ -56,7 +57,7 @@ export class TimedToDo extends Component {
   }
 
   render() {
-    const {title, body, url, complete, start_time, end_time} = this.props.data
+    const {title, body, url, calendar, complete, start_time, end_time} = this.props.data
     const details = this.state.details
     const isLate = this.isLate(end_time)
 
@@ -73,6 +74,7 @@ export class TimedToDo extends Component {
           <h2>{body}</h2>
           <p>{moment(start_time).format("MMM Do YY @ h:mm a")}</p>
           <p>{moment(end_time).format("MMM Do YY @ h:mm a")}</p>
+          {details && <a href={calendar}><button><span>📅</span></button></a>}
           {details && !complete &&
             <button className='complete-button' onClick={() => this.props.completeClicked(url)}>Complete</button>
           }
