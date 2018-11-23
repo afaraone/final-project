@@ -101,8 +101,6 @@ export default class ToDoHandler extends Component {
       body: calendarBody
     })
     let json = await response.json()
-    console.log(json.htmlLink)
-    console.log(json.id)
     return {calendar: json.htmlLink, event: json.id}
   }
 
