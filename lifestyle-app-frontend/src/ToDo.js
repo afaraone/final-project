@@ -17,6 +17,7 @@ export class SimpleToDo extends Component {
 
   render() {
     const { title, body, url, complete } = this.props.data
+    const data = this.props.data
     const details = this.state.details
 
     return (
@@ -32,7 +33,7 @@ export class SimpleToDo extends Component {
           {!complete && details &&
             <button className='complete-button' onClick={() => this.props.completeClicked(url)}>Complete</button>
           }
-          <button className='delete-button' onClick={() => this.props.deleteClicked(url)}>Delete</button>
+          <button className='delete-button' onClick={() => this.props.deleteClicked(data)}>Delete</button>
           </>
         }
 
@@ -58,6 +59,7 @@ export class TimedToDo extends Component {
 
   render() {
     const {title, body, url, calendar, complete, start_time, end_time} = this.props.data
+    const data = this.props.data
     const details = this.state.details
     const isLate = this.isLate(end_time)
 
@@ -78,7 +80,7 @@ export class TimedToDo extends Component {
           {details && !complete &&
             <button className='complete-button' onClick={() => this.props.completeClicked(url)}>Complete</button>
           }
-          <button className='delete-button' onClick={() => this.props.deleteClicked(url)}>Delete</button>
+          <button className='delete-button' onClick={() => this.props.deleteClicked(data)}>Delete</button>
           </>}
       </div>
       </div>

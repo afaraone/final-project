@@ -40,16 +40,27 @@ export default class ToDoHandler extends Component {
   }
 
   // Deletes ToDo by sending DELETE req to API
-  async deleteToDo(url) {
+  async deleteToDo(data) {
     try {
-      await fetch(url, {
+      await fetch(data.url, {
         method: 'DELETE',
         headers: {'Content-Type': 'application/json'}
       })
+      if (data.type === "TimedToDo") {
+        this.deleteFromCalendar(data.event)
+      }
+
     } catch (error) {
       console.log(error)
     }
     this.getToDos()
+  }
+
+  async deleteFromCalendar(eventId) {
+    fetch('https://www.googleapis.com/calendar/v3/calendars/' + this.props.userDetails.email + '/events/' + eventId, {
+      method: 'DELETE',
+      headers: {'Authorization': this.props.session, 'Content-Type': 'application/json' }
+    })
   }
 
   // Adds new todo by sending POST req to API
@@ -63,8 +74,8 @@ export default class ToDoHandler extends Component {
       })
       let todoObj = await response.json()
       if (todoObj.type !== "SimpleToDo") {
-        let calendarUrl = await this.postToCalendar(todoObj)
-        this.putCalendarUrl(todoObj, calendarUrl)
+        let calendarJson = await this.postToCalendar(todoObj)
+        this.putCalendarDetails(todoObj, calendarJson)
       }
     } catch (error) {
       console.log(error)
@@ -72,11 +83,11 @@ export default class ToDoHandler extends Component {
     this.getToDos()
   }
 
-  async putCalendarUrl(todo, calendarUrl) {
+  async putCalendarDetails(todo, calendarJson) {
     fetch(todo.url, {
       method: 'PUT',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({"to_do": {"calendar": calendarUrl}})
+      body: JSON.stringify({"to_do": calendarJson})
     })
   }
 
@@ -90,7 +101,9 @@ export default class ToDoHandler extends Component {
       body: calendarBody
     })
     let json = await response.json()
-    return json.htmlLink
+    console.log(json.htmlLink)
+    console.log(json.id)
+    return {calendar: json.htmlLink, event: json.id}
   }
 
   // Runs automatically when component is loaded

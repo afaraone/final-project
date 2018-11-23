@@ -9,7 +9,7 @@ export default class Garden extends Component {
           <SimpleToDo
             key={todo.id} data={todo}
             completeClicked={(url) => this.props.updateToDo(url)}
-            deleteClicked={(url) => this.props.deleteToDo(url)}
+            deleteClicked={(data) => this.props.deleteToDo(data)}
           />
         )
       } else {
@@ -17,7 +17,7 @@ export default class Garden extends Component {
           <TimedToDo
             key={todo.id} data={todo}
             completeClicked={(url) => this.props.updateToDo(url)}
-            deleteClicked={(url) => this.props.deleteToDo(url)}
+            deleteClicked={(data) => this.props.deleteToDo(data)}
           />
         )
       }
