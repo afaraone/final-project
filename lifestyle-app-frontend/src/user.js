@@ -15,7 +15,6 @@ export default class User extends Component {
     }
 
     async authLogin(response) {
-      console.log(response)
       let body = JSON.stringify({user: response.profileObj})
       let res = await fetch("/api/users/", {
         method: 'POST',

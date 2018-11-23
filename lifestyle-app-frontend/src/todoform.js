@@ -38,7 +38,7 @@ export default class ToDoForm extends Component {
           value={this.state.title}
           type="text"
           placeholder="Title"
-          maxlength='30'
+          maxLength='30'
         />
         <input
           id='simple-body-text-box'
@@ -46,7 +46,7 @@ export default class ToDoForm extends Component {
           value={this.state.body}
           type="text"
           placeholder="Body"
-          maxlength='200'
+          maxLength='200'
         />
 
         <button
